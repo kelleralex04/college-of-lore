@@ -1,0 +1,13 @@
+.AuthPage h1 {
+    width: fit-content;
+    margin: 5vmin auto;
+    padding: 1vmin;
+    background-color: var(--secondary-bg);
+    border: .5vmin solid var(--border);
+    border-radius: 1vmin;
+    color: #000;
+    font-family: "Jim Nightshade", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 72px;
+}
