@@ -1,0 +1,23 @@
+.header {
+    width: 100vw;
+    height: 10vh;
+    border-bottom: 5px solid #CC3D0B;
+    background: #FFEEE7;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1vw;
+    font-family: "Jim Nightshade", cursive;
+}
+
+.header div {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    height: 8vh;
+}
+
+.header h1 {
+    font-size: 4vh;
+}

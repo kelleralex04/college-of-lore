@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUp } from '../../utilities/users-service';
+import'./SignUpForm.css'
 
 export default function SignUpFormFunc({ setUser }) {
     const [ formData, setFormData ] = useState({
@@ -34,7 +35,7 @@ export default function SignUpFormFunc({ setUser }) {
 
     const disable = formData.password !== formData.confirm;
     return (
-        <div>
+        <div className="SignUpForm">
             <div className="form-container">
                 <form autoComplete="off" onSubmit={handleSubmit}>
                     <label>Name</label>

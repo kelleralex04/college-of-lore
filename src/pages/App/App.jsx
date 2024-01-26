@@ -4,6 +4,7 @@ import AuthPage from '../AuthPage/AuthPage';
 import NavBar from '../../components/NavBar/NavBar';
 import CampaignIndex from '../CampaignIndex/CampaignIndex';
 import CampaignHome from '../CampaignHome/CampaignHome';
+import Header from '../../components/Header/Header'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 
@@ -14,6 +15,7 @@ export default function App() {
     <main className="App">
       { user ?
         <>
+          <Header user={user} />
           <NavBar user={user} setUser={setUser} />
           <div className='main-content'>
             <Routes>

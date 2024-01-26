@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: fixed;
 }
 
 .App-logo {
@@ -38,6 +39,9 @@
 }
 
 .main-content {
-  margin-left: 160px; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+  width: 91vw;
+  margin-left: 8vw;
+  margin-top: 10vh;
+  padding: 0px 1vw;
+  font-family: "IM Fell Double Pica", serif;
 }

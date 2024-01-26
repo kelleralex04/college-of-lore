@@ -1,3 +1,7 @@
+.AuthPage {
+    width: 100vw;
+}
+
 .AuthPage h1 {
     width: fit-content;
     margin: 5vmin auto;

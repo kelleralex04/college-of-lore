@@ -30,8 +30,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--main-bg);
-  padding: 2vmin;
   height: 100vh;
+  position: fixed;
 }
 
 code {
@@ -41,6 +41,7 @@ code {
 
 #root {
   height: 100%;
+  position: fixed;
 }
 
 .align-ctr {
@@ -87,6 +88,7 @@ code {
 }
 
 .form-container {
+  width: 50vw;
   padding: 3vmin;
   background-color: var(--secondary-bg);
   border: .5vmin solid var(--border);
@@ -128,6 +130,7 @@ input {
   color: var(--text-dark);
   background-image: none !important; /* prevent lastpass */
   outline: none;
+  font-family: "IM Fell Double Pica", serif;
 }
 
 input:focus {
@@ -147,6 +150,7 @@ button, a.button {
   border-radius: .5vmin;
   outline: none;
   cursor: pointer;
+  font-family: "IM Fell Double Pica", serif;
 }
 
 button.btn-sm {
