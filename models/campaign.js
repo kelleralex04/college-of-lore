@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const campaignSchema = new Schema({
-    user: {
+    user: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
-    },
+    }],
+    category: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+    }],
     name: { type: String, required: true }
 }, {
     timestamps: true

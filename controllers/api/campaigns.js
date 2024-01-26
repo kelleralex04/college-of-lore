@@ -2,7 +2,8 @@ const Campaign = require('../../models/campaign');
 
 module.exports = {
     getCampaignList,
-    addCampaign
+    addCampaign,
+    getCurCampaign
 };
 
 async function getCampaignList(req, res) {
@@ -11,7 +12,12 @@ async function getCampaignList(req, res) {
 }
 
 async function addCampaign(req, res) {
-    Campaign.create({ user: req.user._id, name: req.params.id })
-    const campaignList = await Campaign.getCampaignList(req.user._id);
-    res.json(campaignList);
+    await Campaign.create({ user: req.user._id, name: req.params.id })
+    const newCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.id });
+    res.json(newCampaign);
+}
+
+async function getCurCampaign(req, res) {
+    const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.id });
+    res.json(curCampaign)
 }
