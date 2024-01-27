@@ -3,7 +3,7 @@ const Campaign = require('../../models/campaign');
 module.exports = {
     getCampaignList,
     addCampaign,
-    getCurCampaign
+    getCurCampaign,
 };
 
 async function getCampaignList(req, res) {
@@ -18,6 +18,6 @@ async function addCampaign(req, res) {
 }
 
 async function getCurCampaign(req, res) {
-    const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.id });
+    const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.id }).populate('category');
     res.json(curCampaign)
 }

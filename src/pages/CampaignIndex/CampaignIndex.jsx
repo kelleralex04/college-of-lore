@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CampaignLink from '../../components/CampaignLink/CampaignLink';
 import * as campaignsAPI from '../../utilities/campaigns-api';
 
-export default function CampaignIndex() {
+export default function CampaignIndex({setCampaign}) {
     const [campaigns, setCampaigns] = useState([])
     const [newCampaign, setNewCampaign] = useState('')
 
@@ -11,7 +11,9 @@ export default function CampaignIndex() {
             const campaignList = await campaignsAPI.getCampaignList();
             setCampaigns(...campaigns, campaignList)
         }
-        getCampaigns()
+        getCampaigns();
+
+        setCampaign({});
     }, []);
     
     async function addCampaign(evt) {

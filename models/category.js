@@ -5,7 +5,6 @@ const categorySchema = new Schema({
     subject: [{
         type: Schema.Types.ObjectId,
         ref: 'Subject',
-        required: true
     }],
     name: { type: String, required: true }
 }, {
