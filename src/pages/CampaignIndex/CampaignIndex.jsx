@@ -15,7 +15,7 @@ export default function CampaignIndex({setCampaign}) {
 
         setCampaign({});
     }, []);
-    
+
     async function addCampaign(evt) {
         evt.preventDefault();
         const updatedCampaign = await campaignsAPI.addCampaign(newCampaign);

@@ -30,7 +30,7 @@ export default function NavBar({user, setUser, curCampaign}) {
 
     async function addCategory(evt) {
         evt.preventDefault();
-        const updatedCategory = await categoriesAPI.addCategory(newCategory, curCampaign.name);
+        const updatedCategory = await categoriesAPI.addCategory(curCampaign.name, newCategory);
         setCategories([...categories, updatedCategory]);
         setNewCategory('');
     };
@@ -41,7 +41,7 @@ export default function NavBar({user, setUser, curCampaign}) {
                 <div className="links">
                     <ul>
                         {categories.map((c, idx) => (
-                            <CategoryLink category={c} key={idx} />
+                            <CategoryLink category={c} curCampaign={curCampaign.name} key={idx} />
                         ))}
                     </ul>
                     {showInput ?

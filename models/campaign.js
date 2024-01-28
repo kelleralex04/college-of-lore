@@ -11,7 +11,8 @@ const campaignSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category',
     }],
-    name: { type: String, required: true }
+    name: { type: String, required: true },
+    description: String
 }, {
     timestamps: true
 });

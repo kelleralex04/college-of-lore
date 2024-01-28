@@ -1,9 +1,9 @@
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
-export default function CampaignDetails({category}) {
+export default function CampaignDetails({category, curCampaign}) {
     return (
         <li>
-            <p>{category.name}</p>
+            <Link to={`/${curCampaign}/${category.name}`}>{category.name}</Link>
         </li>
     )
 }
