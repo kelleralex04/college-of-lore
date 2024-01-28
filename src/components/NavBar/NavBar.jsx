@@ -31,7 +31,7 @@ export default function NavBar({user, setUser, curCampaign}) {
     async function addCategory(evt) {
         evt.preventDefault();
         const updatedCategory = await categoriesAPI.addCategory(newCategory, curCampaign.name);
-        setCategories([...categories, updatedCategory]);
+        setCategories([...categories, updatedCategory.name]);
         setNewCategory('');
     };
 
