@@ -20,7 +20,7 @@ export default function NavBar({user, setUser, curCampaign}) {
             if (curCampaign.name) {
                 let catArr = []
                 curCampaign.category.forEach(c => {
-                    catArr.push(c.name)
+                    catArr.push(c)
                 })
                 setCategories(catArr);
             }
@@ -31,7 +31,7 @@ export default function NavBar({user, setUser, curCampaign}) {
     async function addCategory(evt) {
         evt.preventDefault();
         const updatedCategory = await categoriesAPI.addCategory(newCategory, curCampaign.name);
-        setCategories([...categories, updatedCategory.name]);
+        setCategories([...categories, updatedCategory]);
         setNewCategory('');
     };
 

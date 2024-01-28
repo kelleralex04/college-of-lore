@@ -3,7 +3,7 @@
 export default function CampaignDetails({category}) {
     return (
         <li>
-            <p>{category}</p>
+            <p>{category.name}</p>
         </li>
     )
 }
