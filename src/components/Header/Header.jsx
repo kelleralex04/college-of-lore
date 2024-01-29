@@ -1,4 +1,5 @@
 import './Header.css'
+import { Link } from 'react-router-dom'
 
 export default function NavBar({ user, campaign }) {
     return (
@@ -7,7 +8,7 @@ export default function NavBar({ user, campaign }) {
                 <img src="https://i.imgur.com/fnUXPMw.png" alt='' />
                 <p>College of Lore</p>
             </div>
-            <p>{campaign.name}</p>
+            <Link to={`/${campaign.name}`}>{campaign.name}</Link>
             <p>{user.name}</p>
         </div>
     )

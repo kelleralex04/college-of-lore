@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as campaignsAPI from '../../utilities/campaigns-api';
+import './CampaignHome.css'
 
 export default function CampaignHome({campaign, setCampaign}) {
     let { campaignId } = useParams();
@@ -22,14 +23,16 @@ export default function CampaignHome({campaign, setCampaign}) {
     };
 
     return(
-        <>
-            <h1>{campaign.name}</h1>
-            <p>{campaign.description}</p>
-            <form autoComplete="off" onSubmit={addDescription}>
-                <label style={{color: 'black'}}>Add Campaign Description:</label>
-                <input type="text" name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
-                <button type="submit">Add Description</button>
-            </form>
-        </>
+        <div className="campaignHome">
+            {campaign.description ?
+                <p>{campaign.description}</p>
+                :
+                <form autoComplete="off" onSubmit={addDescription}>
+                    <label style={{color: 'black'}}>Add Campaign Description:</label>
+                    <input type="text" name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
+                    <button type="submit">Add Description</button>
+                </form>
+            }
+        </div>
     )
 }
