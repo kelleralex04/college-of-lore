@@ -5,9 +5,9 @@ import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({user, setUser, curCampaign}) {
+export default function NavBar({setUser, curCampaign, categories, setCategories}) {
+
     const [showInput, setShowInput] = useState(false)
-    const [categories, setCategories] = useState([])
     const [newCategory, setNewCategory] = useState('')
 
     function handleLogOut() {
@@ -16,7 +16,7 @@ export default function NavBar({user, setUser, curCampaign}) {
     }
 
     useEffect(function() {
-        async function getCategories() {
+        function getCategories() {
             if (curCampaign.name) {
                 let catArr = []
                 curCampaign.category.forEach(c => {
@@ -31,6 +31,7 @@ export default function NavBar({user, setUser, curCampaign}) {
     async function addCategory(evt) {
         evt.preventDefault();
         const updatedCategory = await categoriesAPI.addCategory(curCampaign.name, newCategory);
+        curCampaign.category.push(updatedCategory)
         setCategories([...categories, updatedCategory]);
         setNewCategory('');
     };

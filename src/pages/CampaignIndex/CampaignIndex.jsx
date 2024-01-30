@@ -1,20 +1,14 @@
 import { useState, useEffect } from "react";
 import CampaignLink from '../../components/CampaignLink/CampaignLink';
 import * as campaignsAPI from '../../utilities/campaigns-api';
+import './CampaignIndex.css'
 
-export default function CampaignIndex({setCampaign}) {
-    const [campaigns, setCampaigns] = useState([])
+export default function CampaignIndex({setCampaign, campaigns, setCampaigns}) {
     const [newCampaign, setNewCampaign] = useState('')
 
     useEffect(function() {
-        async function getCampaigns() {
-            const campaignList = await campaignsAPI.getCampaignList();
-            setCampaigns(...campaigns, campaignList)
-        }
-        getCampaigns();
-
         setCampaign({});
-    }, []);
+    }, [])
 
     async function addCampaign(evt) {
         evt.preventDefault();
@@ -24,7 +18,7 @@ export default function CampaignIndex({setCampaign}) {
     };
 
     return (
-        <>
+        <div className="campaignIndex">
             <h1>Campaign Index</h1>
             <ul>
                 {campaigns.map((c, idx) => (
@@ -36,6 +30,6 @@ export default function CampaignIndex({setCampaign}) {
                 <input type="text" name='name' onChange={(evt) => setNewCampaign(evt.target.value)} value={newCampaign} required />
                 <button type="submit">Add Campaign</button>
             </form>
-        </>
+        </div>
     )
 }

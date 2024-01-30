@@ -1,5 +1,17 @@
 .LoginForm {
     display: flex;
     justify-content: center;
-    margin-top: 5vh;
+    margin-top: 4vh;
+}
+
+.LoginForm input {
+    height: 5vh;
+}
+
+.LoginForm form {
+    gap: 2vmin;
+}
+
+.LoginForm label {
+    margin: 0;
 }

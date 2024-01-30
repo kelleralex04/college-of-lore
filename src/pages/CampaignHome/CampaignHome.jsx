@@ -3,22 +3,26 @@ import { useParams } from "react-router-dom";
 import * as campaignsAPI from '../../utilities/campaigns-api';
 import './CampaignHome.css'
 
-export default function CampaignHome({campaign, setCampaign}) {
+export default function CampaignHome({campaign, setCampaign, campaigns, setCampaigns, getCurCampaign}) {
     let { campaignId } = useParams();
     const [campaignDescription, setCampaignDescription] = useState('')
 
     useEffect(function() {
-        async function getCurCampaign() {
-            const curCampaign = await campaignsAPI.getCurCampaign(campaignId);
-            setCampaign(curCampaign)
-        }
-        getCurCampaign();
-    }, []);
+        getCurCampaign(campaignId);
+    }, [campaignId]);
 
     async function addDescription(evt) {
         evt.preventDefault();
         const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign.name, campaignDescription);
         setCampaign(updatedCampaign)
+        const updatedCampaigns = campaigns.map((c) => {
+            if (c.name === campaign.name) {
+                return updatedCampaign
+            } else {
+                return c
+            }
+        })
+        setCampaigns(updatedCampaigns)
         setCampaignDescription('');
     };
 

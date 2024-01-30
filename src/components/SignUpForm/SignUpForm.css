@@ -2,3 +2,15 @@
     display: flex;
     justify-content: center;
 }
+
+.SignUpForm input {
+    height: 5vh;
+}
+
+.SignUpForm form {
+    gap: 2vmin;
+}
+
+.SignUpForm label {
+    margin: 0;
+}

@@ -18,7 +18,7 @@ const campaignSchema = new Schema({
 });
 
 campaignSchema.statics.getCampaignList = function(userId) {
-    return this.find({ user: userId });
+    return this.find({ user: userId }).populate('category');
 }
 
 module.exports = mongoose.model('Campaign', campaignSchema);
