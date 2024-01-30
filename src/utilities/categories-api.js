@@ -9,7 +9,3 @@ export function addCategory(newCategory, campaign) {
 export function getCategoryList(campaign) {
     return sendRequest(`${BASE_URL}/${campaign}`);
 }
-
-export function getCurCategory(curCampaign,curCategory) {
-    return sendRequest(`${BASE_URL}/${curCampaign}/${curCategory}`);
-}

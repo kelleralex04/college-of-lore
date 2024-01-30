@@ -4,7 +4,6 @@ const Campaign = require('../../models/campaign');
 module.exports = {
     addCategory,
     getCategoryList,
-    getCurCategory,
 };
 
 async function addCategory(req, res) {
@@ -24,10 +23,4 @@ async function getCategoryList(req, res) {
         categoryList.push(category)
     })
     res.json(categoryList);
-}
-
-async function getCurCategory(req, res) {
-    // const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaign });
-    const curCategory = await Category.findOne({ name: req.params.categoryId })
-    res.json(curCategory)
 }

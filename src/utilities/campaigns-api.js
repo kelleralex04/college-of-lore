@@ -13,7 +13,3 @@ export function addCampaign(newCampaign) {
 export function addCampaignDescription(campaign, campaignDescription) {
     return sendRequest(`${BASE_URL}/${campaign}/${campaignDescription}`, 'POST');
 }
-
-export function getCurCampaign(curCampaign) {
-    return sendRequest(`${BASE_URL}/${curCampaign}`);
-}

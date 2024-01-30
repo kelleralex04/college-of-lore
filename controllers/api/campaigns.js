@@ -4,7 +4,6 @@ module.exports = {
     getCampaignList,
     addCampaign,
     addCampaignDescription,
-    getCurCampaign,
 };
 
 async function getCampaignList(req, res) {
@@ -23,9 +22,4 @@ async function addCampaignDescription(req, res) {
     campaign.description = req.params.description
     campaign.save()
     res.json(campaign);
-}
-
-async function getCurCampaign(req, res) {
-    const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.id }).populate('category');
-    res.json(curCampaign)
 }
