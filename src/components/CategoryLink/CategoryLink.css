@@ -1,4 +1,9 @@
-/* .subjectList {
+.subject-form {
     display: flex;
     flex-direction: column;
-} */
+}
+
+.subject-form input {
+    width: 12.5vw;
+    margin-left: 20px;
+}
