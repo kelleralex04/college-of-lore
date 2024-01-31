@@ -3,7 +3,7 @@ const Campaign = require('../../models/campaign');
 
 module.exports = {
     addCategory,
-    getCategoryList,
+    populateCategory,
 };
 
 async function addCategory(req, res) {
@@ -15,12 +15,7 @@ async function addCategory(req, res) {
     res.json(newCategory);
 }
 
-async function getCategoryList(req, res) {
-    const categoryList = []
-    const curCampaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaign });
-    curCampaign.category.forEach(c => {
-        let category = Category.findById(c._id)
-        categoryList.push(category)
-    })
-    res.json(categoryList);
+async function populateCategory(req, res) {
+    const updatedCategory = await Category.findById(req.params.categoryId).populate('subject')
+    res.json(updatedCategory);
 }

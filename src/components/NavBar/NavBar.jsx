@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import CategoryLink from '../CategoryLink/CategoryLink'
 import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, categories, setCategories}) {
-
+export default function NavBar({setUser, curCampaign, curCategory}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -15,24 +14,10 @@ export default function NavBar({setUser, curCampaign, categories, setCategories}
         setUser(null);
     }
 
-    useEffect(function() {
-        function getCategories() {
-            if (curCampaign.name) {
-                let catArr = []
-                curCampaign.category.forEach(c => {
-                    catArr.push(c)
-                })
-                setCategories(catArr);
-            }
-        }
-        getCategories();
-    }, [curCampaign])
-
     async function addCategory(evt) {
         evt.preventDefault();
         const updatedCategory = await categoriesAPI.addCategory(curCampaign.name, newCategory);
         curCampaign.category.push(updatedCategory)
-        setCategories([...categories, updatedCategory]);
         setNewCategory('');
     };
 
@@ -40,9 +25,9 @@ export default function NavBar({setUser, curCampaign, categories, setCategories}
         <div className='sidenav'>
             {curCampaign.name ?
                 <div className="links">
-                    <ul>
-                        {categories.map((c, idx) => (
-                            <CategoryLink category={c} curCampaign={curCampaign.name} key={idx} />
+                    <ul className="categoryList">
+                        {curCampaign.category.map((c, idx) => (
+                            <CategoryLink category={c} curCategory={curCategory} curCampaign={curCampaign.name} key={idx} />
                         ))}
                     </ul>
                     {showInput ?

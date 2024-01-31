@@ -6,6 +6,6 @@ export function addCategory(newCategory, campaign) {
     return sendRequest(`${BASE_URL}/${newCategory}/${campaign}`, 'POST');
 }
 
-export function getCategoryList(campaign) {
-    return sendRequest(`${BASE_URL}/${campaign}`);
+export function populateCategory(categoryId) {
+    return sendRequest(`${BASE_URL}/${categoryId}`)
 }
