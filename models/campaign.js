@@ -11,7 +11,10 @@ const campaignSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category',
     }],
-    campaignNote: [String],
+    sessionNote: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Note',
+    }],
     name: { type: String, required: true },
     description: String
 }, {
@@ -19,7 +22,7 @@ const campaignSchema = new Schema({
 });
 
 campaignSchema.statics.getCampaignList = function(userId) {
-    return this.find({ user: userId }).populate('category');
+    return this.find({ user: userId }).populate('category').populate('sessionNote');
 }
 
 module.exports = mongoose.model('Campaign', campaignSchema);

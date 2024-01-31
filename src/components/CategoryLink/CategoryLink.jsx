@@ -29,7 +29,7 @@ export default function CategoryLink({category, curCategory, curCampaign}) {
                     </ul>
                     {showSubjectInput ?
                         <form autoComplete="off" onSubmit={addSubject} className="subject-form">
-                            <input type="text" className="subject-input" onChange={(evt) => setNewSubject(evt.target.value)} value={newSubject} required />
+                            <input type="text" className="subject-input" onChange={(evt) => setNewSubject(evt.target.value)} value={newSubject} placeholder="New Subject" required />
                             {newSubject === '' ?
                                 <button className="cancel-button" onClick={() => setShowSubjectInput(false)}>Cancel</button>
                                 :

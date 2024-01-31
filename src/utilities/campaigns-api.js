@@ -11,5 +11,9 @@ export function addCampaign(newCampaign) {
 }
 
 export function addCampaignDescription(campaign, campaignDescription) {
-    return sendRequest(`${BASE_URL}/${campaign}/${campaignDescription}`, 'POST');
+    return sendRequest(`${BASE_URL}/${campaign}/description/${campaignDescription}`, 'POST');
+}
+
+export function addCampaignNote(campaign, campaignNote) {
+    return sendRequest(`${BASE_URL}/${campaign}/note/${campaignNote}`, 'POST');
 }

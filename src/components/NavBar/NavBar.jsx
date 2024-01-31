@@ -32,7 +32,7 @@ export default function NavBar({setUser, curCampaign, curCategory}) {
                     </ul>
                     {showInput ?
                         <form autoComplete="off" onSubmit={addCategory} className="category-form">
-                            <input type="text" className="category-input" onChange={(evt) => setNewCategory(evt.target.value)} value={newCategory} required />
+                            <input type="text" className="category-input" onChange={(evt) => setNewCategory(evt.target.value)} value={newCategory} placeholder="New Category" required />
                             {newCategory === '' ?
                                 <button className="cancel-button" onClick={() => setShowInput(false)}>Cancel</button>
                                 :

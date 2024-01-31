@@ -1,16 +1,17 @@
-.campaignHome textarea, label, p {
-    margin-top: 5vh;
+.campaignHome label, p {
+    margin-top: 3vh;
 }
 
 .campaignHome textarea {
-    width: 67vw;
-    height: 10vh;
+    width: 100%;
+    height: 15vh;
     font-family: "IM Fell Double Pica", serif;
     font-weight: 400;
     font-style: normal;
     font-size: 2vmin;
     resize: none;
 }
+
 
 .campaign-description-form {
     display: flex;
@@ -19,8 +20,10 @@
 
 .label-input {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding: 0 10px;
+    gap: 20px;
 }
 
 .campaignHome p {
