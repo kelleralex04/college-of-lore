@@ -6,6 +6,7 @@ import './CampaignHome.css'
 export default function CampaignHome({campaign, setCampaign, campaigns, setCampaigns, getCurCampaign}) {
     let { campaignId } = useParams();
     const [campaignDescription, setCampaignDescription] = useState('')
+    const [showDescriptionInput, setShowDescriptionInput] = useState(false)
 
     useEffect(function() {
         getCurCampaign(campaignId);
@@ -24,16 +25,37 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
         })
         setCampaigns(updatedCampaigns)
         setCampaignDescription('');
+        setShowDescriptionInput(false)
     };
+
+    function showEditDescription() {
+        setShowDescriptionInput(true);
+        setCampaignDescription(campaign.description);
+    }
 
     return(
         <div className="campaignHome">
             {campaign.description ?
-                <p>{campaign.description}</p>
+                <div>
+                    {showDescriptionInput ?
+                        <form autoComplete="off" onSubmit={addDescription}>
+                            <label style={{color: 'black'}}>Edit Campaign Description:</label>
+                            <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
+                            <button type="submit">Edit Description</button>
+                        </form>
+                        :
+                        <div className="description">
+                            <p>{campaign.description}</p>
+                            <button onClick={() => showEditDescription()}>Edit Description</button>
+                        </div>
+                    }
+                </div>
                 :
-                <form autoComplete="off" onSubmit={addDescription}>
-                    <label style={{color: 'black'}}>Add Campaign Description:</label>
-                    <input type="text" name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
+                <form autoComplete="off" onSubmit={addDescription} className="campaign-description-form">
+                    <div className="label-input">
+                        <label style={{color: 'black'}}>Add Campaign Description:</label>
+                        <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
+                    </div>
                     <button type="submit">Add Description</button>
                 </form>
             }
