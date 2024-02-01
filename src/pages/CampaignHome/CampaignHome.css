@@ -1,5 +1,15 @@
+.campaignHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .campaignHome label, p {
     margin-top: 3vh;
+}
+
+.campaignHome button {
+    margin: 1vh 0;
 }
 
 .campaignHome textarea {
@@ -13,21 +23,31 @@
 }
 
 
-.campaign-description-form {
+.campaign-description-form, .session-note-form {
     display: flex;
     flex-direction: column;
+    width: 90%;
+    padding: 0 10px;
+}
+
+.edit-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .label-input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0 10px;
     gap: 20px;
 }
 
 .campaignHome p {
     font-size: 3vmin;
+    white-space: pre;
+    text-wrap: wrap;
 }
 
 .description {
@@ -42,4 +62,8 @@
 
 .description button {
     width: 10vw;
+}
+
+.session-note-table {
+    width: 30vw;
 }

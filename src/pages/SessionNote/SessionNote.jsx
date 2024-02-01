@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import './SessionNote.css'
 
 export default function SessionNote({sessionNote, getCurSessionNote}) {
     let { noteId } = useParams();
@@ -9,6 +10,9 @@ export default function SessionNote({sessionNote, getCurSessionNote}) {
     }, []);
 
     return(
-        <h1>{sessionNote.title}</h1>
+        <div className="session-note">
+            <h1>{sessionNote.title} &nbsp; - &nbsp; {sessionNote.date}</h1>
+            <p>{sessionNote.content}</p>
+        </div>
     )
 }

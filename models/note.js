@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const noteSchema = new Schema({
     title: String,
-    date: Date,
+    date: String,
     content: String,
 }, {
     timestamps: true

@@ -20,7 +20,8 @@ async function addCampaign(req, res) {
 
 async function addCampaignDescription(req, res) {
     const campaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaignId }).populate('category');
-    campaign.description = req.params.description
+    console.log(req.params.description)
+    campaign.description = req.params.description.replaceAll('<br>', '\n') 
     campaign.save()
     res.json(campaign);
 }

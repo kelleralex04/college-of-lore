@@ -21,15 +21,10 @@ export default function App() {
   const [category, setCategory] = useState({})
   const [subject, setsubject] = useState({})
 
-  useEffect(function() {
-    async function getCampaigns() {
-      const campaignList = await campaignsAPI.getCampaignList();
-      setCampaigns(campaignList)
-    }
-    if (user) {
-      getCampaigns();
-    }
-  }, [user]);
+  async function getCampaigns() {
+    const campaignList = await campaignsAPI.getCampaignList();
+    setCampaigns(campaignList)
+  }
 
   function getCurCampaign(campaignId) {
     const curCampaign = campaigns.find((c) => c.name === campaignId);
@@ -49,7 +44,7 @@ export default function App() {
           <NavBar user={user} setUser={setUser} curCampaign={campaign} curCategory={category} />
           <div className='main-content'>
             <Routes>
-              <Route path="/campaigns" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} />} />
+              <Route path="/campaigns" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} />} />
               <Route path="/:campaignId" element={<CampaignHome campaign={campaign} setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCurCampaign={getCurCampaign} />} />
               <Route path="/SessionNote/:campaignId/:noteId" element={<SessionNote sessionNote={sessionNote} getCurSessionNote={getCurSessionNote} />} />
               <Route path="/:campaignId/:categoryId" element={<CategoryHome campaign={campaign} category={category} setCategory={setCategory} />} />

@@ -15,11 +15,11 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
 
     useEffect(function() {
         getCurCampaign(campaignId);
-    }, [campaignId]);
+    }, []);
 
     async function addDescription(evt) {
         evt.preventDefault();
-        const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign.name, campaignDescription);
+        const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign.name, campaignDescription.replace(/\n/g, '<br>'));
         setCampaign(updatedCampaign)
         const updatedCampaigns = campaigns.map((c) => {
             if (c.name === campaign.name) {
@@ -35,7 +35,7 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
 
     async function addCampaignNote(evt) {
         evt.preventDefault();
-        const updatedCampaign = await notesAPI.addCampaignNote(campaign.name, campaignNoteTitle, campaignNoteDate, campaignNote);
+        const updatedCampaign = await notesAPI.addCampaignNote(campaign.name, campaignNoteTitle, campaignNoteDate, campaignNote.replace(/\n/g, '<br>'));
         setCampaign(updatedCampaign)
         const updatedCampaigns = campaigns.map((c) => {
             if (c.name === campaign.name) {
@@ -56,9 +56,9 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
     return(
         <div className="campaignHome">
             {campaign.description ?
-                <div>
+                <div className="edit-description">
                     {showDescriptionInput ?
-                        <form autoComplete="off" onSubmit={addDescription}>
+                        <form autoComplete="off" onSubmit={addDescription} className="campaign-description-form">
                             <label style={{color: 'black'}}>Edit Campaign Description:</label>
                             <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
                             <button type="submit">Edit Description</button>
@@ -79,16 +79,24 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
                     <button type="submit">Add Description</button>
                 </form>
             }
-            {campaign.sessionNote ?
-                <ul>
-                    {campaign.sessionNote.map((n, idx) => (
-                        <SessionNoteLink campaign={campaign.name} note={n} key={idx} />
-                    ))}
-                </ul>
-                :
-                <p>No Notes Yet</p>
-            }
-            <form autoComplete="off" onSubmit={addCampaignNote} className="campaign-description-form">
+            <table className="session-note-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                    </tr>
+                    {campaign.sessionNote ?
+                        <>
+                            {campaign.sessionNote.map((n, idx) => (
+                                <SessionNoteLink campaign={campaign.name} note={n} key={idx} />
+                            ))}
+                        </>
+                        :
+                        <p>No Notes</p>
+                    }
+                </thead>
+            </table>
+            <form autoComplete="off" onSubmit={addCampaignNote} className="session-note-form">
                 <div className="label-input">
                     <label style={{color: 'black'}}>Add Session Note:</label>
                     <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
