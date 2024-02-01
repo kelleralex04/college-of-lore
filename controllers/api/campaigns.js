@@ -4,7 +4,6 @@ module.exports = {
     getCampaignList,
     addCampaign,
     addCampaignDescription,
-    addCampaignNote,
 };
 
 async function getCampaignList(req, res) {
@@ -19,16 +18,9 @@ async function addCampaign(req, res) {
 }
 
 async function addCampaignDescription(req, res) {
-    const campaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaignId }).populate('category');
+    const campaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaignId }).populate('category').populate('sessionNote');
     console.log(req.params.description)
     campaign.description = req.params.description.replaceAll('<br>', '\n') 
-    campaign.save()
-    res.json(campaign);
-}
-
-async function addCampaignNote(req, res) {
-    const campaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaignId }).populate('category');
-    campaign.campaignNote.push(req.params.note)
     campaign.save()
     res.json(campaign);
 }

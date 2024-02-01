@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .campaignHome label, p {
@@ -45,7 +46,7 @@
 }
 
 .campaignHome p {
-    font-size: 3vmin;
+    font-size: 2vmin;
     white-space: pre;
     text-wrap: wrap;
 }
@@ -54,6 +55,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 30vh;
+    width: 100%;
+    overflow: auto;
+    border: 2px;
+    border-style: none none solid none;
+    border-color: var(--border);
 }
 
 .description p {
@@ -66,4 +73,20 @@
 
 .session-note-table {
     width: 30vw;
+}
+
+.table-body {
+    display: block;
+    overflow-y: scroll;
+    max-height: 10vh;
+}
+
+.table-body tr {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+}
+
+.header-row {
+    width: 100%;
+    display: inline-table;
 }

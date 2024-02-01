@@ -46,6 +46,8 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
         })
         setCampaigns(updatedCampaigns)
         setCampaignNote('');
+        setCampaignNoteTitle('');
+        setCampaignNoteDate('');
     };
 
     function showEditDescription() {
@@ -80,21 +82,21 @@ export default function CampaignHome({campaign, setCampaign, campaigns, setCampa
                 </form>
             }
             <table className="session-note-table">
-                <thead>
+                <thead className="header-row">
                     <tr>
                         <th>Title</th>
                         <th>Date</th>
                     </tr>
+                </thead>
                     {campaign.sessionNote ?
-                        <>
+                        <tbody className="table-body">
                             {campaign.sessionNote.map((n, idx) => (
                                 <SessionNoteLink campaign={campaign.name} note={n} key={idx} />
                             ))}
-                        </>
+                        </tbody>
                         :
                         <p>No Notes</p>
                     }
-                </thead>
             </table>
             <form autoComplete="off" onSubmit={addCampaignNote} className="session-note-form">
                 <div className="label-input">
