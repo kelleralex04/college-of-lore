@@ -38,7 +38,7 @@
     color: var(--text-light);
 }
 
-.links {
+.bottom-links {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -47,8 +47,8 @@
 
 .add-button, .cancel-button {
     width: 10vw;
-    color: #000;
-    font-size: 25px;
+    color: var(--border);
+    font-size: 2vmin;
     font-weight: normal;
     background: none;
     border: none;
@@ -58,7 +58,7 @@
 }
 
 .add-button:hover {
-    color: var(--text-light);
+    color: var(--border-light);
 }
 
 .add-button:disabled, .category-form:invalid button[type="submit"] {

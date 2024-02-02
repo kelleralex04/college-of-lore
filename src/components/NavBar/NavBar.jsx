@@ -5,7 +5,7 @@ import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, curCategory, setCurrentMain, setCategory}) {
+export default function NavBar({setUser, curCampaign, curCategory, setCurrentMain, setCategory, setSubject}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -19,6 +19,7 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurrentMai
         const updatedCategory = await categoriesAPI.addCategory(curCampaign.name, newCategory);
         curCampaign.category.push(updatedCategory)
         setNewCategory('');
+        setShowInput(false);
     };
 
     async function openCategory(c) {
@@ -28,6 +29,7 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurrentMai
     }
 
     async function openSubject(s) {
+        setSubject(s)
         setCurrentMain('SubjectDetail')
     }
 
@@ -42,7 +44,7 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurrentMai
                     </ul>
                     {showInput ?
                         <form autoComplete="off" onSubmit={addCategory} className="category-form">
-                            <input type="text" className="category-input" onChange={(evt) => setNewCategory(evt.target.value)} value={newCategory} placeholder="New Category" required />
+                            <input type="text" className="category-input" onChange={(evt) => setNewCategory(evt.target.value)} value={newCategory} placeholder="New Folder" required />
                             {newCategory === '' ?
                                 <button className="cancel-button" onClick={() => setShowInput(false)}>Cancel</button>
                                 :
@@ -50,13 +52,13 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurrentMai
                             }
                         </form>
                         :
-                        <button className="add-button" onClick={() => setShowInput(true)}>+ Add Category</button>
+                        <button className="add-button" onClick={() => setShowInput(true)}>+ Add Folder</button>
                     }
                 </div>
                 :
                 <div></div>
             }
-            <div className="links">
+            <div className="bottom-links">
                 <Link to='/'>Campaigns </Link>
                 <Link to='' onClick={handleLogOut}>Log Out</Link>
             </div>

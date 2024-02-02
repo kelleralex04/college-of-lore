@@ -7,3 +7,8 @@
     width: 12.5vw;
     margin-left: 20px;
 }
+.sidenav-link {
+    cursor: pointer;
+    font-size: 2.5vmin;
+    padding: 6px 8px 6px 16px;
+}

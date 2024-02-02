@@ -38,3 +38,7 @@
 .App {
   height: 100vh;
 }
+
+.link {
+  cursor: pointer;
+}

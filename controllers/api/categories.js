@@ -4,6 +4,7 @@ const Campaign = require('../../models/campaign');
 module.exports = {
     addCategory,
     populateCategory,
+    addCategoryDescription,
 };
 
 async function addCategory(req, res) {
@@ -18,4 +19,11 @@ async function addCategory(req, res) {
 async function populateCategory(req, res) {
     const updatedCategory = await Category.findById(req.params.categoryId).populate('subject')
     res.json(updatedCategory);
+}
+
+async function addCategoryDescription(req, res) {
+    const category = await Category.findById(req.params.categoryId).populate('subject');
+    category.description = req.params.description.replaceAll('<br>', '\n') 
+    category.save()
+    res.json(category);
 }

@@ -1,6 +1,6 @@
-export default function SubjectDetail({category}) {
+export default function SubjectDetail({subject}) {
 
     return(
-        <h1>hello</h1>
+        <h1>{subject.name}</h1>
     )
 }

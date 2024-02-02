@@ -2,34 +2,35 @@ import { useState } from "react"
 import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryLink.css'
 
-export default function CategoryLink({category, curCategory, curCampaign, openCategory, openSubject}) {
+export default function CategoryLink({category, curCategory, openCategory, openSubject}) {
     const [showSubjectInput, setShowSubjectInput] = useState(false)
     const [newSubject, setNewSubject] = useState('')
 
     async function addSubject(evt) {
         evt.preventDefault();
-        const updatedSubject = await subjectsAPI.addSubject(curCampaign, curCategory.name, newSubject);
+        const updatedSubject = await subjectsAPI.addSubject(curCategory._id, newSubject);
         curCategory.subject.push(updatedSubject)
         setNewSubject('');
+        setShowSubjectInput(false);
     };
 
     return (
         <>
             <li>
-                <button onClick={() => openCategory(category)}>{category.name}</button>
+                <p className="sidenav-link" onClick={() => openCategory(category)}>{category.name}</p>
             </li>
             {curCategory.name === category.name ?
                 <div className="subjectList">
                     <ul>
                         {curCategory.subject.map((s, idx) => (
                             <li key={idx}>
-                                <p onClick={() => openSubject()}>{s.name}</p>
+                                <p className="sidenav-link" style={{'padding': '6px 8px 6px 0'}} onClick={() => openSubject(s)}>{s.name}</p>
                             </li>
                         ))}
                     </ul>
                     {showSubjectInput ?
                         <form autoComplete="off" onSubmit={addSubject} className="subject-form">
-                            <input type="text" className="subject-input" onChange={(evt) => setNewSubject(evt.target.value)} value={newSubject} placeholder="New Subject" required />
+                            <input type="text" className="subject-input" onChange={(evt) => setNewSubject(evt.target.value)} value={newSubject} placeholder="New File" required />
                             {newSubject === '' ?
                                 <button className="cancel-button" onClick={() => setShowSubjectInput(false)}>Cancel</button>
                                 :
@@ -37,7 +38,7 @@ export default function CategoryLink({category, curCategory, curCampaign, openCa
                             }
                         </form>
                         :
-                        <button className="add-button" onClick={() => setShowSubjectInput(true)}>+ Add Subject</button>
+                        <button className="add-button" onClick={() => setShowSubjectInput(true)}>+ Add File</button>
                     }
                 </div>
                 :

@@ -1,0 +1,33 @@
+.category-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.category-detail button {
+    margin: 1vh 0;
+}
+
+.category-detail p {
+    font-size: 2vmin;
+    white-space: pre;
+    text-wrap: wrap;
+}
+
+.category-detail textarea {
+    width: 100%;
+    height: 15vh;
+    font-family: "IM Fell Double Pica", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2vmin;
+    resize: none;
+}
+
+.category-description-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 0 10px;
+}

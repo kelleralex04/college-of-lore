@@ -6,7 +6,7 @@ import SubjectDetail from "../../components/SubjectDetail/SubjectDetail"
 import SessionNoteDetail from "../../components/SessionNoteDetail/SessionNoteDetail"
 import * as campaignsAPI from '../../utilities/campaigns-api';
 
-export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote}) {
+export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote, subject, setSubject}) {
     let { campaignId } = useParams();
 
     useEffect(function() {
@@ -20,8 +20,8 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
     return (
         <>
             {currentMain === 'CampaignDetail' && <CampaignDetail campaign={campaign} setCampaign={setCampaign} setCurrentMain={setCurrentMain} setSessionNote={setSessionNote} />}
-            {currentMain === 'CategoryDetail' && <CategoryDetail category={category} setCategory={setCategory} />}
-            {currentMain === 'SubjectDetail' && <SubjectDetail category={category} />}
+            {currentMain === 'CategoryDetail' && <CategoryDetail category={category} setCategory={setCategory} setCurrentMain={setCurrentMain} setSubject={setSubject} />}
+            {currentMain === 'SubjectDetail' && <SubjectDetail subject={subject} />}
             {currentMain === 'SessionNoteDetail' && <SessionNoteDetail sessionNote={sessionNote} />}
         </>
     )

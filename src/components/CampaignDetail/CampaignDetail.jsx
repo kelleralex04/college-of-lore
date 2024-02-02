@@ -12,7 +12,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
 
     async function addDescription(evt) {
         evt.preventDefault();
-        const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign.name, campaignDescription.replace(/\n/g, '<br>'));
+        const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign._id, campaignDescription.replace(/\n/g, '<br>'));
         setCampaign(updatedCampaign)
         setCampaignDescription('');
         setShowDescriptionInput(false)
