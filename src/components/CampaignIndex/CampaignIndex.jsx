@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
-import CampaignLink from '../../components/CampaignLink/CampaignLink';
+import { useEffect, useState } from "react";
 import * as campaignsAPI from '../../utilities/campaigns-api';
 import './CampaignIndex.css'
 
-export default function CampaignIndex({setCampaign, campaigns, setCampaigns, getCampaigns}) {
+export default function CampaignIndex({setCampaign, campaigns, setCampaigns, setCurrentMain}) {
     const [newCampaign, setNewCampaign] = useState('')
 
     useEffect(function() {
-        getCampaigns();
-        setCampaign({});
+        setCampaign({})
     }, [])
 
     async function addCampaign(evt) {
@@ -18,12 +16,19 @@ export default function CampaignIndex({setCampaign, campaigns, setCampaigns, get
         setNewCampaign('');
     };
 
+    function openCampaign(c) {
+        setCampaign(c)
+        setCurrentMain('CampaignHome')
+    }
+
     return (
         <div className="campaignIndex">
             <h1>Campaign Index</h1>
             <ul>
                 {campaigns.map((c, idx) => (
-                    <CampaignLink campaign={c} key={idx} />
+                    <li key={idx}>
+                        <button onClick={() => openCampaign(c)}>{c.name}</button>
+                    </li>
                 ))}
             </ul>
             <form autoComplete="off" onSubmit={addCampaign}>

@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom"
 import { useState } from "react"
-import SubjectLink from "../SubjectLink/SubjectLink"
 import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryLink.css'
 
-export default function CategoryLink({category, curCategory, curCampaign}) {
+export default function CategoryLink({category, curCategory, curCampaign, openCategory, openSubject}) {
     const [showSubjectInput, setShowSubjectInput] = useState(false)
     const [newSubject, setNewSubject] = useState('')
 
@@ -18,13 +16,15 @@ export default function CategoryLink({category, curCategory, curCampaign}) {
     return (
         <>
             <li>
-                <Link to={`/${curCampaign}/${category.name}`}>{category.name}</Link>
+                <button onClick={() => openCategory(category)}>{category.name}</button>
             </li>
             {curCategory.name === category.name ?
                 <div className="subjectList">
                     <ul>
                         {curCategory.subject.map((s, idx) => (
-                            <SubjectLink subject={s} curCampaign={curCampaign} curCategory={curCategory.name} key={idx} />
+                            <li key={idx}>
+                                <p onClick={() => openSubject()}>{s.name}</p>
+                            </li>
                         ))}
                     </ul>
                     {showSubjectInput ?

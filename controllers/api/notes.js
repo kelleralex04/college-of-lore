@@ -7,7 +7,7 @@ module.exports = {
 
 
 async function addCampaignNote(req, res) {
-    const campaign = await Campaign.findOne({ user: req.user._id, name: req.params.campaignId }).populate('category').populate('sessionNote');
+    const campaign = await Campaign.findById(req.params.campaignId).populate('category').populate('sessionNote');
     const note = await Note.create({title: req.params.noteTitleId, date: req.params.noteDateId, content: req.params.noteContentId.replaceAll('<br>', '\n')})
     campaign.sessionNote.push(note)
     campaign.save()

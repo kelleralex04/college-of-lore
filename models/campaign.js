@@ -22,7 +22,7 @@ const campaignSchema = new Schema({
 });
 
 campaignSchema.statics.getCampaignList = function(userId) {
-    return this.find({ user: userId }).populate('category').populate('sessionNote');
+    return this.find({ user: userId });
 }
 
 module.exports = mongoose.model('Campaign', campaignSchema);

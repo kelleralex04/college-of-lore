@@ -5,7 +5,7 @@ import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, curCategory}) {
+export default function NavBar({setUser, curCampaign, curCategory, setCurrentMain, setCategory}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -21,13 +21,23 @@ export default function NavBar({setUser, curCampaign, curCategory}) {
         setNewCategory('');
     };
 
+    async function openCategory(c) {
+        const updatedCategory = await categoriesAPI.populateCategory(c._id)
+        setCategory(updatedCategory)
+        setCurrentMain('CategoryDetail')
+    }
+
+    async function openSubject(s) {
+        setCurrentMain('SubjectDetail')
+    }
+
     return (
         <div className='sidenav'>
             {curCampaign.name ?
                 <div className="links">
                     <ul className="categoryList">
                         {curCampaign.category.map((c, idx) => (
-                            <CategoryLink category={c} curCategory={curCategory} curCampaign={curCampaign.name} key={idx} />
+                            <CategoryLink category={c} curCategory={curCategory} curCampaign={curCampaign.name} openCategory={openCategory} openSubject={openSubject} key={idx} />
                         ))}
                     </ul>
                     {showInput ?
@@ -47,7 +57,7 @@ export default function NavBar({setUser, curCampaign, curCategory}) {
                 <div></div>
             }
             <div className="links">
-                <Link to='/campaigns'>Campaigns </Link>
+                <Link to='/'>Campaigns </Link>
                 <Link to='' onClick={handleLogOut}>Log Out</Link>
             </div>
         </div>

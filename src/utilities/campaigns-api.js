@@ -6,6 +6,10 @@ export function getCampaignList() {
     return sendRequest(`${BASE_URL}/index`);
 }
 
+export function getCurCampaign(campaignId) {
+    return sendRequest(`${BASE_URL}/${campaignId}`);
+}
+
 export function addCampaign(newCampaign) {
     return sendRequest(`${BASE_URL}/${newCampaign}`, 'POST');
 }
