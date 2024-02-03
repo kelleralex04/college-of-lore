@@ -91,3 +91,8 @@
     width: 100%;
     display: inline-table;
 }
+
+.note-link:hover {
+    cursor: pointer;
+    color: var(--border)
+}

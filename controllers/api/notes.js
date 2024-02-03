@@ -3,6 +3,7 @@ const Note = require('../../models/note');
 
 module.exports = {
     addCampaignNote,
+    editCampaignNote,
 };
 
 
@@ -12,4 +13,13 @@ async function addCampaignNote(req, res) {
     campaign.sessionNote.push(note)
     campaign.save()
     res.json(campaign);
+}
+
+async function editCampaignNote(req, res) {
+    await Note.updateOne(
+        { _id: req.params.sessionNoteId },
+        {$set: {title: req.params.noteTitleId, date: req.params.noteDateId, content: req.params.noteContentId.replaceAll('<br>', '\n')}}
+    )
+    const note = await Note.findById(req.params.sessionNoteId)
+    res.json(note);
 }

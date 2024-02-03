@@ -1,0 +1,8 @@
+.session-note p {
+    padding: 0 3vw;
+    max-height: 75vh;
+    overflow: auto;
+    font-size: 2vmin;
+    white-space: pre;
+    text-wrap: wrap;
+}

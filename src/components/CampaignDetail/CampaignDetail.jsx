@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import * as campaignsAPI from '../../utilities/campaigns-api';
-import * as notesAPI from '../../utilities/notes-api';
 import './CampaignDetail.css'
 
-export default function CampaignDetail({campaign, setCampaign, setCurrentMain, setSessionNote}) {
+export default function CampaignDetail({campaign, setCampaign, setCurrentMain, setSessionNote, campaignNote, setCampaignNote, campaignNoteTitle, setCampaignNoteTitle, campaignNoteDate, 
+    setCampaignNoteDate, addCampaignNote}) {
+    let { campaignId } = useParams();
+
     const [campaignDescription, setCampaignDescription] = useState('')
-    const [campaignNoteTitle, setCampaignNoteTitle] = useState('')
-    const [campaignNoteDate, setCampaignNoteDate] = useState('')
-    const [campaignNote, setCampaignNote] = useState('')
     const [showDescriptionInput, setShowDescriptionInput] = useState(false)
+
+    useEffect(function() {
+        async function getCurCampaign(campaignId) {
+            const curCampaign = await campaignsAPI.getCurCampaign(campaignId);
+            setCampaign(curCampaign)
+        }
+        getCurCampaign(campaignId)
+    }, [])
 
     async function addDescription(evt) {
         evt.preventDefault();
@@ -16,15 +24,6 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setCampaign(updatedCampaign)
         setCampaignDescription('');
         setShowDescriptionInput(false)
-    };
-
-    async function addCampaignNote(evt) {
-        evt.preventDefault();
-        const updatedCampaign = await notesAPI.addCampaignNote(campaign._id, campaignNoteTitle, campaignNoteDate, campaignNote.replace(/\n/g, '<br>'));
-        setCampaign(updatedCampaign)
-        setCampaignNote('');
-        setCampaignNoteTitle('');
-        setCampaignNoteDate('');
     };
 
     function showEditDescription() {
@@ -74,7 +73,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                         <tbody className="table-body">
                             {campaign.sessionNote.map((n, idx) => (
                                 <tr key={idx}>
-                                    <td onClick={() => openSessionNote(n)}>{n.title}</td>
+                                    <td className="note-link" onClick={() => openSessionNote(n)}>{n.title}</td>
                                     <td>{n.date}</td>
                                 </tr>
                             ))}
