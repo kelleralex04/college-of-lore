@@ -8,7 +8,6 @@
     left: 0;
     background-color: var(--secondary-bg);
     overflow-x: hidden;
-    padding: 20px 0;
     border-right: 3px solid #CC3D0B;
     font-family: "IM Fell Double Pica", serif;
     display: flex;
@@ -26,7 +25,7 @@
 .sidenav a, p {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 2.5vmin;
     color: #000;
     display: flex;
     flex-direction: column;
@@ -42,7 +41,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 10vw;
+    width: 15vw;
+}
+
+.bottom-links p {
+    font-size: 2.5vmin;
+    padding: 6px 0 6px 16px;
+    cursor: pointer;
 }
 
 .add-button, .cancel-button {
@@ -77,3 +82,12 @@
     margin-left: 20px;
 }
 
+.top-links {
+    padding: 1vh 0.5vw 1vh 0;
+    width: 15vw;
+    max-height: 80vh;
+    overflow: auto;
+    border: 2px;
+    border-style: none none solid none;
+    border-color: var(--border);
+}

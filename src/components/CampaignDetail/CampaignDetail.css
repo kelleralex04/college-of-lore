@@ -47,6 +47,7 @@
 
 .campaignDetail p {
     font-size: 2vmin;
+    padding: 1vh 2vw 0;
     white-space: pre;
     text-wrap: wrap;
 }

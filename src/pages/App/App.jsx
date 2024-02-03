@@ -17,6 +17,7 @@ export default function App() {
   const [sessionNote, setSessionNote] = useState({})
   const [category, setCategory] = useState({})
   const [subject, setSubject] = useState({})
+  const [showSettings, setShowSettings] = useState(false)
 
   async function getCampaigns() {
     const campaignList = await campaignsAPI.getCampaignList();
@@ -29,12 +30,13 @@ export default function App() {
         <>
           <Header user={user} campaign={campaign} setCategory={setCategory} setCurrentMain={setCurrentMain} />
           <NavBar user={user} setUser={setUser} curCampaign={campaign} curCategory={category} setCurCategory={setCategory} setCurrentMain={setCurrentMain} setCategory={setCategory} 
-          setSubject={setSubject} />
+          setSubject={setSubject} showSettings={showSettings} />
           <div className='main-content'>
             <Routes>
-              <Route path="/" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} setCurrentMain={setCurrentMain} />} />
+              <Route path="/" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} setCurrentMain={setCurrentMain}
+              setShowSettings={setShowSettings} />} />
               <Route path="/campaign/:campaignId" element={<HomePage campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} currentMain={currentMain} 
-              setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} />} />
+              setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} setShowSettings={setShowSettings} />} />
             </Routes>
           </div>
         </>

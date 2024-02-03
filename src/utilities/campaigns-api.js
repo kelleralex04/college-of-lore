@@ -21,3 +21,7 @@ export function addCampaignDescription(campaignId, campaignDescription) {
 export function addCampaignNote(campaign, campaignNote) {
     return sendRequest(`${BASE_URL}/${campaign}/note/${campaignNote}`, 'POST');
 }
+
+export function deleteCampaign(campaignId) {
+    return sendRequest(`${BASE_URL}/${campaignId}`, 'DELETE')
+}

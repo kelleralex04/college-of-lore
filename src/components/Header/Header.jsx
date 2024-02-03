@@ -1,6 +1,6 @@
 import './Header.css'
 
-export default function NavBar({ user, campaign, setCategory, setCurrentMain }) {
+export default function Header({ user, campaign, setCategory, setCurrentMain }) {
 
     function openCampaign() {
         setCategory({})
@@ -13,7 +13,7 @@ export default function NavBar({ user, campaign, setCategory, setCurrentMain }) 
                 <img src="https://i.imgur.com/fnUXPMw.png" alt='' />
                 <p>College of Lore</p>
             </div>
-            <p className='link' id='campaign-name' style={{'margin-right': '5%'}} onClick={() => openCampaign()}>{campaign.name}</p>
+            <p className='link' id='campaign-name' style={{'marginRight': '5%'}} onClick={() => openCampaign()}>{campaign.name}</p>
             <p>{user.name}</p>
         </div>
     )

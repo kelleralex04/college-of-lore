@@ -3,13 +3,14 @@ import CampaignLink from '../../components/CampaignLink/CampaignLink';
 import * as campaignsAPI from '../../utilities/campaigns-api';
 import './CampaignIndex.css'
 
-export default function CampaignIndex({setCampaign, campaigns, setCampaigns, getCampaigns, setCurrentMain}) {
+export default function CampaignIndex({setCampaign, campaigns, setCampaigns, getCampaigns, setCurrentMain, setShowSettings}) {
     const [newCampaign, setNewCampaign] = useState('')
 
     useEffect(function() {
         getCampaigns();
         setCampaign({});
-        setCurrentMain('CampaignDetail')
+        setCurrentMain('CampaignDetail');
+        setShowSettings(false);
     }, [])
 
     async function addCampaign(evt) {

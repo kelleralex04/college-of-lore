@@ -5,7 +5,7 @@ import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject}) {
+export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject, showSettings}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -36,7 +36,7 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurCategor
     return (
         <div className='sidenav'>
             {curCampaign.name ?
-                <div className="links">
+                <div className="top-links">
                     <ul className="categoryList">
                         {curCampaign.category.map((c, idx) => (
                             <CategoryLink category={c} curCategory={curCategory} setCurCategory={setCurCategory} curCampaign={curCampaign.name} openCategory={openCategory} 
@@ -60,6 +60,11 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurCategor
                 <div></div>
             }
             <div className="bottom-links">
+                {showSettings ?
+                    <p onClick={() => setCurrentMain('CampaignSettings')}>Campaign Settings</p>
+                    :
+                    <></>
+                }
                 <Link to='/'>Campaigns </Link>
                 <Link to='' onClick={handleLogOut}>Log Out</Link>
             </div>

@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CampaignDetail from "../../components/CampaignDetail/CampaignDetail";
 import CategoryDetail from "../../components/CategoryDetail/CategoryDetail"
 import SubjectDetail from "../../components/SubjectDetail/SubjectDetail"
 import SessionNoteDetail from "../../components/SessionNoteDetail/SessionNoteDetail"
+import CampaignSettings from "../../components/CampaignSettings/CampaignSettings";
 
-export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote, subject, setSubject, subjectAdded}) {
-
+export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote, subject, setSubject, subjectAdded, 
+    setShowSettings}) {
     const [campaignNoteTitle, setCampaignNoteTitle] = useState('')
     const [campaignNoteDate, setCampaignNoteDate] = useState('')
     const [campaignNote, setCampaignNote] = useState('')
+
+    useEffect(function() {
+        setShowSettings(true)
+    }, [])
 
     return (
         <>
@@ -21,6 +26,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             {currentMain === 'SessionNoteDetail' && <SessionNoteDetail sessionNote={sessionNote} setSessionNote={setSessionNote} campaignNoteTitle={campaignNoteTitle} 
             setCampaignNoteTitle={setCampaignNoteTitle} campaignNoteDate={campaignNoteDate} setCampaignNoteDate={setCampaignNoteDate} campaignNote={campaignNote} 
             setCampaignNote={setCampaignNote} />}
+            {currentMain === 'CampaignSettings' && <CampaignSettings campaign={campaign} />}
         </>
     )
 }

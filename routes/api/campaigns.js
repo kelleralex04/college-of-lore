@@ -6,5 +6,6 @@ router.get('/index', campaignsCtrl.getCampaignList);
 router.get('/:campaignId', campaignsCtrl.getCurCampaign);
 router.post('/:id', campaignsCtrl.addCampaign);
 router.post('/:campaignId/description/:description', campaignsCtrl.addCampaignDescription);
+router.delete('/:campaignId', campaignsCtrl.deleteCampaign);
 
 module.exports = router;
