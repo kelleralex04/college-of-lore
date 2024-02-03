@@ -13,3 +13,7 @@ export function addCategoryDescription(categoryId, categoryDescription) {
 export function populateCategory(categoryId) {
     return sendRequest(`${BASE_URL}/${categoryId}`)
 }
+
+export function deleteCategory(campaignId, categoryId) {
+    return sendRequest(`${BASE_URL}/${campaignId}/${categoryId}`, 'DELETE');
+}

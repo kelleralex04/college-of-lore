@@ -5,5 +5,6 @@ const categoriesCtrl = require('../../controllers/api/categories');
 router.post('/:campaign/:id', categoriesCtrl.addCategory);
 router.get('/:categoryId', categoriesCtrl.populateCategory);
 router.post('/:categoryId/description/:description', categoriesCtrl.addCategoryDescription);
+router.delete('/:campaignId/:categoryId', categoriesCtrl.deleteCategory);
 
 module.exports = router;

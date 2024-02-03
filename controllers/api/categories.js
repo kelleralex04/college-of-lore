@@ -1,10 +1,12 @@
-const Category = require('../../models/category');
 const Campaign = require('../../models/campaign');
+const Category = require('../../models/category');
+const Subject = require('../../models/subject');
 
 module.exports = {
     addCategory,
     populateCategory,
     addCategoryDescription,
+    deleteCategory,
 };
 
 async function addCategory(req, res) {
@@ -26,4 +28,18 @@ async function addCategoryDescription(req, res) {
     category.description = req.params.description.replaceAll('<br>', '\n') 
     category.save()
     res.json(category);
+}
+
+async function deleteCategory(req, res) {
+    let campaign = await Campaign.findById(req.params.campaignId)
+    const catIdx = campaign.category.indexOf(req.params.categoryId)
+    campaign.category.splice(catIdx, 1)
+    campaign.save()
+    const category = await Category.findById(req.params.categoryId).populate('subject');
+    for (let i = category.subject.length - 1; i >=0; i--) {
+        await Subject.deleteOne({_id: category.subject[i]})
+    }
+    await Category.deleteOne({_id: req.params.categoryId})
+    const user = req.user._id
+    res.json(user)
 }

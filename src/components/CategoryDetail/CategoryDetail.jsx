@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './CategoryDetail.css'
 
-export default function CategoryDetail({category, setCategory, setCurrentMain, setSubject}) {
+export default function CategoryDetail({campaign, category, setCategory, setCurrentMain, setSubject}) {
     const [categoryDescription, setCategoryDescription] = useState('')
     const [showCategoryDescriptionInput, setShowCategoryDescriptionInput] = useState(false)
 
@@ -22,6 +22,12 @@ export default function CategoryDetail({category, setCategory, setCurrentMain, s
     async function openSubject(s) {
         setSubject(s)
         setCurrentMain('SubjectDetail')
+    }
+
+    async function deleteCategory() {
+        await categoriesAPI.deleteCategory(campaign._id, category._id);
+        setCategory({})
+        setCurrentMain('CampaignDetail')
     }
 
     return(
@@ -59,6 +65,7 @@ export default function CategoryDetail({category, setCategory, setCurrentMain, s
                     </li>
                 ))}
             </ul>
+            <button onClick={() => deleteCategory()}>Delete Folder</button>
         </div>
     )
 }

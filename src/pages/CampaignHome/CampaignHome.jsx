@@ -20,7 +20,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             {currentMain === 'CampaignDetail' && <CampaignDetail campaign={campaign} setCampaign={setCampaign} setCurrentMain={setCurrentMain} setSessionNote={setSessionNote}
             campaignNoteTitle={campaignNoteTitle} setCampaignNoteTitle={setCampaignNoteTitle} campaignNoteDate={campaignNoteDate} setCampaignNoteDate={setCampaignNoteDate}
             campaignNote={campaignNote} setCampaignNote={setCampaignNote} />}
-            {currentMain === 'CategoryDetail' && <CategoryDetail category={category} setCategory={setCategory} setCurrentMain={setCurrentMain} setSubject={setSubject} 
+            {currentMain === 'CategoryDetail' && <CategoryDetail campaign={campaign} category={category} setCategory={setCategory} setCurrentMain={setCurrentMain} setSubject={setSubject} 
             subjectAdded={subjectAdded} />}
             {currentMain === 'SubjectDetail' && <SubjectDetail subject={subject} />}
             {currentMain === 'SessionNoteDetail' && <SessionNoteDetail sessionNote={sessionNote} setSessionNote={setSessionNote} campaignNoteTitle={campaignNoteTitle} 
