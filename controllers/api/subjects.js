@@ -8,8 +8,8 @@ module.exports = {
 async function addSubject(req, res) {
     await Subject.create({ name: req.params.subjectId })
     const newSubject = await Subject.findOne({ name: req.params.subjectId });
-    const curCategory = await Category.findById(req.params.categoryId)
+    const curCategory = await Category.findById(req.params.categoryId).populate('subject')
     curCategory.subject.push(newSubject)
     await curCategory.save();
-    res.json(newSubject);
+    res.json(curCategory);
 }

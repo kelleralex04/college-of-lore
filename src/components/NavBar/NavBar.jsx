@@ -5,7 +5,7 @@ import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, curCategory, setCurrentMain, setCategory, setSubject}) {
+export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -39,7 +39,8 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurrentMai
                 <div className="links">
                     <ul className="categoryList">
                         {curCampaign.category.map((c, idx) => (
-                            <CategoryLink category={c} curCategory={curCategory} curCampaign={curCampaign.name} openCategory={openCategory} openSubject={openSubject} key={idx} />
+                            <CategoryLink category={c} curCategory={curCategory} setCurCategory={setCurCategory} curCampaign={curCampaign.name} openCategory={openCategory} 
+                            openSubject={openSubject} key={idx} />
                         ))}
                     </ul>
                     {showInput ?

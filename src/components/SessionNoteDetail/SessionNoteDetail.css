@@ -19,14 +19,18 @@
     margin-top: 3vh;
 }
 
+.session-note {
+    width: 100%;
+}
+
 .session-note p {
-    padding: 0 3vw;
+    padding: 2vh 3vw 2vh;
     overflow: auto;
     font-size: 2vmin;
     white-space: pre;
     text-wrap: wrap;
     border: 2px;
-    border-style: none none solid none;
+    border-style: solid none solid none;
     border-color: var(--border);
 }
 

@@ -2,14 +2,14 @@ import { useState } from "react"
 import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryLink.css'
 
-export default function CategoryLink({category, curCategory, openCategory, openSubject}) {
+export default function CategoryLink({category, curCategory, setCurCategory, openCategory, openSubject}) {
     const [showSubjectInput, setShowSubjectInput] = useState(false)
     const [newSubject, setNewSubject] = useState('')
 
     async function addSubject(evt) {
         evt.preventDefault();
-        const updatedSubject = await subjectsAPI.addSubject(curCategory._id, newSubject);
-        curCategory.subject.push(updatedSubject)
+        const updatedCategory = await subjectsAPI.addSubject(curCategory._id, newSubject);
+        setCurCategory(updatedCategory)
         setNewSubject('');
         setShowSubjectInput(false);
     };

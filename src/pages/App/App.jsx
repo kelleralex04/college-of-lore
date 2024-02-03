@@ -5,7 +5,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../CampaignHome/CampaignHome'
 import CampaignIndex from '../CampaignIndex/CampaignIndex'
 import Header from '../../components/Header/Header'
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import * as campaignsAPI from '../../utilities/campaigns-api';
 
@@ -28,12 +28,13 @@ export default function App() {
       { user ?
         <>
           <Header user={user} campaign={campaign} setCategory={setCategory} setCurrentMain={setCurrentMain} />
-          <NavBar user={user} setUser={setUser} curCampaign={campaign} curCategory={category} setCurrentMain={setCurrentMain} setCategory={setCategory} setSubject={setSubject} />
+          <NavBar user={user} setUser={setUser} curCampaign={campaign} curCategory={category} setCurCategory={setCategory} setCurrentMain={setCurrentMain} setCategory={setCategory} 
+          setSubject={setSubject} />
           <div className='main-content'>
             <Routes>
               <Route path="/" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} setCurrentMain={setCurrentMain} />} />
-              <Route path="/campaign/:campaignId" element={<HomePage campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} 
-                currentMain={currentMain} setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} />} />
+              <Route path="/campaign/:campaignId" element={<HomePage campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} currentMain={currentMain} 
+              setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} />} />
             </Routes>
           </div>
         </>

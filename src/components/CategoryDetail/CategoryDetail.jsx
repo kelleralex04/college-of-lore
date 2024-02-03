@@ -1,21 +1,10 @@
 import { useState } from 'react';
 import * as categoriesAPI from '../../utilities/categories-api';
-import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryDetail.css'
 
 export default function CategoryDetail({category, setCategory, setCurrentMain, setSubject}) {
     const [categoryDescription, setCategoryDescription] = useState('')
     const [showCategoryDescriptionInput, setShowCategoryDescriptionInput] = useState(false)
-    const [showSubjectInput, setShowSubjectInput] = useState(false)
-    const [newSubject, setNewSubject] = useState('')
-
-    async function addSubject(evt) {
-        evt.preventDefault();
-        const updatedSubject = await subjectsAPI.addSubject(category._id, newSubject);
-        category.subject.push(updatedSubject)
-        setNewSubject('');
-        setShowSubjectInput(false);
-    };
 
     async function addDescription(evt) {
         evt.preventDefault();
@@ -70,20 +59,6 @@ export default function CategoryDetail({category, setCategory, setCurrentMain, s
                     </li>
                 ))}
             </ul>
-            <>
-                {showSubjectInput ?
-                    <form autoComplete="off" onSubmit={addSubject} className="subject-form">
-                        <input type="text" className="subject-input" onChange={(evt) => setNewSubject(evt.target.value)} value={newSubject} placeholder="New File" required />
-                        {newSubject === '' ?
-                            <button className="cancel-button" onClick={() => setShowSubjectInput(false)}>Cancel</button>
-                            :
-                            <button className="add-button" type="submit">Add</button>
-                        }
-                    </form>
-                    :
-                    <button className="add-button" onClick={() => setShowSubjectInput(true)}>+ Add File</button>
-                }
-            </>
         </div>
     )
 }
