@@ -31,7 +31,7 @@ export default function App() {
           <NavBar user={user} setUser={setUser} curCampaign={campaign} curCategory={category} setCurrentMain={setCurrentMain} setCategory={setCategory} setSubject={setSubject} />
           <div className='main-content'>
             <Routes>
-              <Route path="/" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} />} />
+              <Route path="/" element={<CampaignIndex setCampaign={setCampaign} campaigns={campaigns} setCampaigns={setCampaigns} getCampaigns={getCampaigns} setCurrentMain={setCurrentMain} />} />
               <Route path="/campaign/:campaignId" element={<HomePage campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} 
                 currentMain={currentMain} setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} />} />
             </Routes>
