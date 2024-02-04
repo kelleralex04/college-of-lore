@@ -1,26 +1,39 @@
 import { useState } from 'react';
+import * as campaignsAPI from '../../utilities/campaigns-api';
 import * as categoriesAPI from '../../utilities/categories-api';
+import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryDetail.css'
 
-export default function CategoryDetail({campaign, category, setCategory, setCurrentMain, setSubject}) {
+export default function CategoryDetail({campaign, setCampaign, category, setCategory, setCurrentMain, setSubject}) {
+    const [categoryName, setCategoryName] = useState('')
     const [categoryDescription, setCategoryDescription] = useState('')
     const [showCategoryDescriptionInput, setShowCategoryDescriptionInput] = useState(false)
+    const [showCategoryWarning, setShowCategoryWarning] = useState(false)
 
-    async function addDescription(evt) {
+    async function editCategory(evt) {
         evt.preventDefault();
-        const updatedCategory = await categoriesAPI.addCategoryDescription(category._id, categoryDescription.replace(/\n/g, '<br>'));
-        setCategory(updatedCategory)
+        if (categoryDescription && categoryDescription.length > 0) {
+            const updatedCategory = await categoriesAPI.editCategory(category._id, categoryName, categoryDescription.replace(/\n/g, '<br>'));
+            setCategory(updatedCategory)
+        } else {
+            const updatedCategory = await categoriesAPI.editCategoryTitle(category._id, categoryName)
+            setCategory(updatedCategory)
+        }
+        const updatedCampaign = await campaignsAPI.getCurCampaign(campaign._id)
+        setCampaign(updatedCampaign)
         setCategoryDescription('');
         setShowCategoryDescriptionInput(false)
     };
 
-    function showEditDescription() {
+    function showEditCategory() {
         setShowCategoryDescriptionInput(true);
+        setCategoryName(category.name);
         setCategoryDescription(category.description);
     }
 
     async function openSubject(s) {
-        setSubject(s)
+        const updatedSubject = await subjectsAPI.populateSubject(s._id)
+        setSubject(updatedSubject)
         setCurrentMain('SubjectDetail')
     }
 
@@ -32,40 +45,52 @@ export default function CategoryDetail({campaign, category, setCategory, setCurr
 
     return(
         <div className='category-detail'>
-            <h1>{category.name}</h1>
-            {category.description ?
-                <div className="edit-description">
-                    {showCategoryDescriptionInput ?
-                        <form autoComplete="off" onSubmit={addDescription} className="category-description-form">
-                            <label style={{color: 'black'}}>Edit Category Description:</label>
-                            <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} required />
-                            <button type="submit">Edit Description</button>
-                        </form>
-                        :
-                        <div className="description">
-                            <p>{category.description}</p>
-                            <button onClick={() => showEditDescription()}>Edit Description</button>
+            <div className="edit-category">
+                {showCategoryDescriptionInput ?
+                    <form autoComplete="off" onSubmit={editCategory} className="category-description-form">
+                        <label style={{color: 'black'}}>Edit Folder Name:</label>
+                        <input style={{color: 'black'}} type="text" onChange={(evt) => setCategoryName(evt.target.value)} value={categoryName} required />
+                        <label style={{color: 'black'}}>Edit Folder Description:</label>
+                        <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} />
+                        <button type="submit">Save</button>
+                    </form>
+                    :
+                    <div style={{width: '100%'}}>
+                        <h1>{category.name}</h1>
+                        <div className="category-description">
+                            {category.description ?
+                                <p>{category.description}</p>
+                                :
+                                <p>No description yet...</p>
+                            }
+                            <button onClick={() => showEditCategory()}>Edit Folder</button>
                         </div>
-                    }
-                </div>
-                :
-                <form autoComplete="off" onSubmit={addDescription} className="category-description-form">
-                    <div className="label-input">
-                        <label style={{color: 'black'}}>Add Folder Description:</label>
-                        <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} required />
                     </div>
-                    <button type="submit">Add Description</button>
-                </form>
-            }
-            <h1>Files</h1>
-            <ul>
-                {category.subject.map((s, idx) => (
-                    <li key={idx}>
-                        <p className="sidenav-link" style={{'padding': '6px 8px 6px 0'}} onClick={() => openSubject(s)}>{s.name}</p>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={() => deleteCategory()}>Delete Folder</button>
+                }
+            </div>
+            <div className='bottom-elements'>
+                <div className='files'>
+                    <h1>Files</h1>
+                    <ul className='file-list'>
+                        {category.subject.map((s, idx) => (
+                            <li key={idx}>
+                                <p className="sidenav-link" style={{'padding': '6px 8px 6px 0'}} onClick={() => openSubject(s)}>{s.name}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                {showCategoryWarning ?
+                    <div className='delete-category-warning'>
+                        <p>Are you sure?</p>
+                        <div>
+                            <button onClick={() => deleteCategory()}>DELETE</button>
+                            <button onClick={() => setShowCategoryWarning(false)}>Cancel</button>
+                        </div>
+                    </div>
+                    :
+                    <button onClick={() => setShowCategoryWarning(true)}>Delete Folder</button>
+                }
+            </div>
         </div>
     )
 }

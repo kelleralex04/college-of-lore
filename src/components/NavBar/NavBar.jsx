@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import CategoryLink from '../CategoryLink/CategoryLink'
 import * as userService from '../../utilities/users-service';
 import * as categoriesAPI from '../../utilities/categories-api';
+import * as subjectsAPI from '../../utilities/subjects-api';
 import './NavBar.css'
 
 export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject, showSettings}) {
@@ -29,7 +30,8 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurCategor
     }
 
     async function openSubject(s) {
-        setSubject(s)
+        const updatedSubject = await subjectsAPI.populateSubject(s._id)
+        setSubject(updatedSubject)
         setCurrentMain('SubjectDetail')
     }
 

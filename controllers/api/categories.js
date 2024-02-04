@@ -5,7 +5,8 @@ const Subject = require('../../models/subject');
 module.exports = {
     addCategory,
     populateCategory,
-    addCategoryDescription,
+    editCategory,
+    editCategoryTitle,
     deleteCategory,
 };
 
@@ -23,9 +24,18 @@ async function populateCategory(req, res) {
     res.json(updatedCategory);
 }
 
-async function addCategoryDescription(req, res) {
+async function editCategory(req, res) {
     const category = await Category.findById(req.params.categoryId).populate('subject');
+    category.name = req.params.name
     category.description = req.params.description.replaceAll('<br>', '\n') 
+    category.save()
+    res.json(category);
+}
+
+async function editCategoryTitle(req, res) {
+    const category = await Category.findById(req.params.categoryId).populate('subject');
+    category.name = req.params.name
+    category.description = undefined
     category.save()
     res.json(category);
 }

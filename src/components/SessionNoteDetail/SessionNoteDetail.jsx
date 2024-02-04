@@ -34,7 +34,7 @@ export default function SessionNoteDetail({sessionNote, setSessionNote, campaign
                 <p id={noteHeight}>{sessionNote.content}</p>
             </div>
             {showSessionNoteInput ?
-                <form autoComplete="off" onSubmit={editCampaignNote} className="session-note-form">
+                <form autoComplete="off" onSubmit={editCampaignNote} className="session-note-form" id='edit'>
                     <div className="label-input">
                         <label style={{color: 'black'}}>Edit Session Note:</label>
                         <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />

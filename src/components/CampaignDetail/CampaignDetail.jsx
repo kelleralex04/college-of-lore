@@ -7,10 +7,12 @@ import './CampaignDetail.css'
 export default function CampaignDetail({campaign, setCampaign, setCurrentMain, setSessionNote, campaignNote, setCampaignNote, campaignNoteTitle, setCampaignNoteTitle, campaignNoteDate, 
     setCampaignNoteDate}) {
     let { campaignId } = useParams();
-
+    
+    const [campaignName, setCampaignName] = useState('')
     const [campaignDescription, setCampaignDescription] = useState('')
     const [showDescriptionInput, setShowDescriptionInput] = useState(false)
     const [showSessionNoteInput, setShowSessionNoteInput] = useState(false)
+    const [campaignDescriptionHeight, setCampaignDescriptionHeight] = useState("tall-campaign-description")
 
     useEffect(function() {
         async function getCurCampaign(campaignId) {
@@ -20,10 +22,15 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         getCurCampaign(campaignId)
     }, [])
 
-    async function addDescription(evt) {
+    async function editCampaign(evt) {
         evt.preventDefault();
-        const updatedCampaign = await campaignsAPI.addCampaignDescription(campaign._id, campaignDescription.replace(/\n/g, '<br>'));
-        setCampaign(updatedCampaign)
+        if (campaignDescription && campaignDescription.length > 0) {
+            const updatedCampaign = await campaignsAPI.editCampaign(campaign._id, campaignName, campaignDescription.replace(/\n/g, '<br>'));
+            setCampaign(updatedCampaign)
+        } else {
+            const updatedCampaign = await campaignsAPI.editCampaignTitle(campaign._id, campaignName);
+            setCampaign(updatedCampaign)
+        }
         setCampaignDescription('');
         setShowDescriptionInput(false)
     };
@@ -35,11 +42,16 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setCampaignNote('');
         setCampaignNoteTitle('');
         setCampaignNoteDate('');
+        setShowSessionNoteInput(false);
+        setCampaignDescriptionHeight("tall-campaign-description");
     };
 
 
-    function showEditDescription() {
+    function showEditCampaign() {
         setShowDescriptionInput(true);
+        setShowSessionNoteInput(false);
+        setCampaignDescriptionHeight("tall-campaign-description");
+        setCampaignName(campaign.name)
         setCampaignDescription(campaign.description);
     }
 
@@ -48,32 +60,39 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setSessionNote(note)
     }
 
+    function openSessionNoteInput() {
+        setShowDescriptionInput(false);
+        setShowSessionNoteInput(true);
+        setCampaignDescriptionHeight("short-campaign-description");
+    }
+
+    function closeSessionNoteInput() {
+        setShowSessionNoteInput(false);
+        setCampaignDescriptionHeight("tall-campaign-description");
+    }
+
     return(
         <div className="campaignDetail">
-            {campaign.description ?
-                <div className="edit-description">
-                    {showDescriptionInput ?
-                        <form autoComplete="off" onSubmit={addDescription} className="campaign-description-form">
-                            <label style={{color: 'black'}}>Edit Campaign Description:</label>
-                            <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
-                            <button type="submit">Edit Description</button>
-                        </form>
-                        :
-                        <div className="description">
+            <div className="edit-description" id={campaignDescriptionHeight}>
+                {showDescriptionInput ?
+                    <form autoComplete="off" onSubmit={editCampaign} className="campaign-description-form">
+                        <label style={{color: 'black'}}>Edit Campaign Name:</label>
+                        <input style={{color: 'black'}} type="text" onChange={(evt) => setCampaignName(evt.target.value)} value={campaignName} required />
+                        <label style={{color: 'black'}}>Edit Campaign Description:</label>
+                        <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} />
+                        <button type="submit">Save</button>
+                    </form>
+                    :
+                    <div className="description">
+                        {campaign.description ?
                             <p>{campaign.description}</p>
-                            <button onClick={() => showEditDescription()}>Edit Description</button>
-                        </div>
-                    }
-                </div>
-                :
-                <form autoComplete="off" onSubmit={addDescription} className="campaign-description-form">
-                    <div className="label-input">
-                        <label style={{color: 'black'}}>Add Campaign Description:</label>
-                        <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} required />
+                            :
+                            <p>No description yet...</p>
+                        }
+                        <button onClick={() => showEditCampaign()}>Edit Campaign</button>
                     </div>
-                    <button type="submit">Add Description</button>
-                </form>
-            }
+                }
+            </div>
             <table className="session-note-table">
                 <thead className="header-row">
                     <tr>
@@ -100,15 +119,15 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                         <label style={{color: 'black'}}>Add Session Note:</label>
                         <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
                         <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
-                        <textarea name='name' onChange={(evt) => setCampaignNote(evt.target.value)} value={campaignNote} placeholder="Lorem ipsum dolor sit amet..." required />
+                        <textarea id="campaign-note-input" name='name' onChange={(evt) => setCampaignNote(evt.target.value)} value={campaignNote} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
                     <div>
-                        <button onClick={() => setShowSessionNoteInput(false)}>Cancel</button>
+                        <button onClick={() => closeSessionNoteInput()}>Cancel</button>
                         <button type="submit">Add Note</button>
                     </div>
                 </form>
             :
-                <button onClick={() => setShowSessionNoteInput(true)}>Add Session Note</button>
+                <button onClick={() => openSessionNoteInput()}>Add Session Note</button>
             }
         </div>
     )

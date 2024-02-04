@@ -3,6 +3,7 @@ const Category = require('../../models/category');
 
 module.exports = {
     addSubject,
+    populateSubject,
 };
 
 async function addSubject(req, res) {
@@ -12,4 +13,9 @@ async function addSubject(req, res) {
     curCategory.subject.push(newSubject)
     await curCategory.save();
     res.json(curCategory);
+}
+
+async function populateSubject(req, res) {
+    const subject = await Subject.findById(req.params.subjectId).populate('subjectNote')
+    res.json(subject);
 }

@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 const subjectSchema = new Schema({
     name: { type: String, required: true },
-    note: [String],
+    subjectNote: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Note',
+    }],
     link: [String]
 }, {
     timestamps: true
