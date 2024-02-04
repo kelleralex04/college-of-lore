@@ -4,10 +4,13 @@
     align-items: center;
 }
 
+.edit-session-note input {
+    width: 20vw;
+}
 
 .edit-session-note textarea {
     width: 100%;
-    height: 15vh;
+    height: 40vh;
     font-family: "IM Fell Double Pica", serif;
     font-weight: 400;
     font-style: normal;
@@ -39,7 +42,7 @@
 }
 
 #short {
-    max-height: 35vh;
+    max-height: 15vh;
 }
 
 .edit-buttons {

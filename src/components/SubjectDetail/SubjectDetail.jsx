@@ -1,5 +1,6 @@
 import { useState } from "react"
 import * as notesAPI from '../../utilities/notes-api';
+import './SubjectDetail.css'
 
 export default function SubjectDetail({subject, setSubject, setCurrentMain, setSubjectNote, subjectNoteContent, setSubjectNoteContent, subjectNoteTitle, setSubjectNoteTitle, 
     subjectNoteDate, setSubjectNoteDate }) {
@@ -20,8 +21,16 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
         setSubjectNote(note);
     }
 
+    function openSubjectNoteInput() {
+        setShowSubjectNoteInput(true)
+        setSubjectNoteTitle('')
+        setSubjectNoteContent('')
+        setSubjectNoteDate('')
+    }
+
     return(
-        <div>
+        <div className="file-detail">
+            <h1>{subject.name}</h1>
             <table className="subject-note-table">
                 <thead className="header-row">
                     <tr>
@@ -43,13 +52,13 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                     }
             </table>
             {showSubjectNoteInput ?
-                <div>
-                    <h1>{subject.name}</h1>
-                    <form autoComplete="off" onSubmit={addSubjectNote} className="session-note-form">
+                <div className="add-subject-note">
+                    <form autoComplete="off" onSubmit={addSubjectNote} className="subject-note-form">
                         <div className="label-input">
-                            <label style={{color: 'black'}}>Add Session Note:</label>
-                            <input type="text" name='title' onChange={(evt) => setSubjectNoteTitle(evt.target.value)} value={subjectNoteTitle} placeholder="Title" required />
-                            <input type="date" name='date' onChange={(evt) => setSubjectNoteDate(evt.target.value)} value={subjectNoteDate} required />
+                            <div className="inputs">
+                                <input type="text" name='title' onChange={(evt) => setSubjectNoteTitle(evt.target.value)} value={subjectNoteTitle} placeholder="Title" required />
+                                <input type="date" name='date' onChange={(evt) => setSubjectNoteDate(evt.target.value)} value={subjectNoteDate} required />
+                            </div>
                             <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
                         </div>
                         <div>
@@ -59,7 +68,7 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                     </form>
                 </div>
                 :
-                <button onClick={() => setShowSubjectNoteInput(true)}>Add Note</button>
+                <button onClick={() => openSubjectNoteInput()}>Add Note</button>
             }
         </div>
     )

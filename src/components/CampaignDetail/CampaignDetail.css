@@ -9,13 +9,24 @@
     margin-top: 3vh;
 }
 
+.campaignDetail input {
+    width: 20vw;
+}
+
+.inputs {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
+
 .campaignDetail button {
     margin: 1vh 0;
 }
 
 .campaignDetail textarea {
     width: 100%;
-    height: 37.3vh;
+    height: 38.3vh;
     font-family: "IM Fell Double Pica", serif;
     font-weight: 400;
     font-style: normal;
@@ -24,7 +35,7 @@
 }
 
 #campaign-note-input {
-    height: 30vh;
+    height: 32vh;
 }
 
 
@@ -48,6 +59,7 @@
 .label-input {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     gap: 20px;
 }
@@ -68,7 +80,7 @@
 }
 
 #tall-campaign-description {
-    max-height: 65vh;
+    max-height: 59vh;
 }
 
 #short-campaign-description {
@@ -88,23 +100,14 @@
     margin-top: 1vh;
 }
 
-.table-body {
-    display: block;
-    overflow: auto;
-    max-height: 10vh;
-}
-
-.table-body tr {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-}
-
-.header-row {
-    width: 100%;
-    display: inline-table;
-}
-
 .note-link:hover {
     cursor: pointer;
     color: var(--border)
+}
+
+.session-note-buttons {
+    display: flex;
+    width: 15vw;
+    justify-content: space-between;
+    align-self: center;
 }

@@ -47,24 +47,41 @@ export default function CategoryDetail({campaign, setCampaign, category, setCate
         <div className='category-detail'>
             <div className="edit-category">
                 {showCategoryDescriptionInput ?
-                    <form autoComplete="off" onSubmit={editCategory} className="category-description-form">
-                        <label style={{color: 'black'}}>Edit Folder Name:</label>
-                        <input style={{color: 'black'}} type="text" onChange={(evt) => setCategoryName(evt.target.value)} value={categoryName} required />
-                        <label style={{color: 'black'}}>Edit Folder Description:</label>
-                        <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} />
-                        <button type="submit">Save</button>
-                    </form>
-                    :
-                    <div style={{width: '100%'}}>
-                        <h1>{category.name}</h1>
-                        <div className="category-description">
-                            {category.description ?
-                                <p>{category.description}</p>
+                    <div className='top-elements'>
+                        <form id='edit-category-form' autoComplete="off" onSubmit={editCategory} className="category-description-form">
+                            <label style={{color: 'black'}}>Edit Folder Name:</label>
+                            <input style={{color: 'black'}} type="text" onChange={(evt) => setCategoryName(evt.target.value)} value={categoryName} required />
+                            <label style={{color: 'black'}}>Edit Folder Description:</label>
+                            <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} placeholder="Lorem ipsum dolor sit amet..." />
+                        </form>
+                        <div>
+                            <button type="submit" form='edit-category-form'>Save</button>
+                            {showCategoryWarning ?
+                                <div className='delete-category-warning'>
+                                    <p>Are you sure?</p>
+                                    <div>
+                                        <button onClick={() => deleteCategory()}>DELETE</button>
+                                        <button onClick={() => setShowCategoryWarning(false)}>Cancel</button>
+                                    </div>
+                                </div>
                                 :
-                                <p>No description yet...</p>
+                                <button onClick={() => setShowCategoryWarning(true)}>Delete Folder</button>
                             }
-                            <button onClick={() => showEditCategory()}>Edit Folder</button>
                         </div>
+                    </div>
+                    :
+                    <div>
+                        <div style={{width: '100%'}}>
+                            <h1>{category.name}</h1>
+                            <div className="category-description">
+                                {category.description ?
+                                    <p>{category.description}</p>
+                                    :
+                                    <p>No description yet...</p>
+                                }
+                            </div>
+                        </div>
+                        <button onClick={() => showEditCategory()}>Edit Folder</button>
                     </div>
                 }
             </div>
@@ -79,17 +96,6 @@ export default function CategoryDetail({campaign, setCampaign, category, setCate
                         ))}
                     </ul>
                 </div>
-                {showCategoryWarning ?
-                    <div className='delete-category-warning'>
-                        <p>Are you sure?</p>
-                        <div>
-                            <button onClick={() => deleteCategory()}>DELETE</button>
-                            <button onClick={() => setShowCategoryWarning(false)}>Cancel</button>
-                        </div>
-                    </div>
-                    :
-                    <button onClick={() => setShowCategoryWarning(true)}>Delete Folder</button>
-                }
             </div>
         </div>
     )

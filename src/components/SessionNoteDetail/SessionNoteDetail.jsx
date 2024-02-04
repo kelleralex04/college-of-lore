@@ -38,9 +38,10 @@ export default function SessionNoteDetail({campaign, sessionNote, setSessionNote
             {showSessionNoteInput ?
                 <form autoComplete="off" onSubmit={editCampaignNote} className="session-note-form" id='edit'>
                     <div className="label-input">
-                        <label style={{color: 'black'}}>Edit Session Note:</label>
-                        <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
-                        <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
+                        <div className='inputs'>
+                            <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
+                            <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
+                        </div>
                         <textarea name='name' onChange={(evt) => setCampaignNote(evt.target.value)} value={campaignNote} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
                     <div className='edit-buttons'>

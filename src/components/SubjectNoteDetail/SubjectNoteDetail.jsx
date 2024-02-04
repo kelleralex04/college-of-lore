@@ -37,9 +37,10 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
             {showSubjectNoteInput ?
                 <form autoComplete="off" onSubmit={editSubjectNote} className="subject-note-form" id='edit'>
                     <div className="label-input">
-                        <label style={{color: 'black'}}>Edit Subject Note:</label>
-                        <input type="text" name='title' onChange={(evt) => setSubjectNoteTitle(evt.target.value)} value={subjectNoteTitle} placeholder="Title" required />
-                        <input type="date" name='date' onChange={(evt) => setSubjectNoteDate(evt.target.value)} value={subjectNoteDate} required />
+                        <div className='inputs'>
+                            <input type="text" name='title' onChange={(evt) => setSubjectNoteTitle(evt.target.value)} value={subjectNoteTitle} placeholder="Title" required />
+                            <input type="date" name='date' onChange={(evt) => setSubjectNoteDate(evt.target.value)} value={subjectNoteDate} required />
+                        </div>
                         <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
                     <div>

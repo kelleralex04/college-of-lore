@@ -18,7 +18,7 @@
 
 .category-detail textarea {
     width: 100%;
-    height: 25vh;
+    height: 40vh;
     font-family: "IM Fell Double Pica", serif;
     font-weight: 400;
     font-style: normal;
@@ -42,6 +42,13 @@
     width: 100%;
     overflow: auto;
     padding: 0 2vw 0 2vw;
+}
+
+.top-elements {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .edit-category {
@@ -68,14 +75,11 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border: 2px;
-    border-style: none none solid none;
-    border-color: var(--border);
 }
 
 .file-list {
     width: 10vw;
-    max-height: 23vh;
+    max-height: 25vh;
     overflow: auto;
 }
 

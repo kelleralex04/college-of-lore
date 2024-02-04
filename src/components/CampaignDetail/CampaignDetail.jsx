@@ -61,6 +61,10 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
     }
 
     function openSessionNoteInput() {
+        setCampaignNoteTitle('');
+        setCampaignNoteDate('');
+        setCampaignNote('');
+        setCampaignNoteTitle('');
         setShowDescriptionInput(false);
         setShowSessionNoteInput(true);
         setCampaignDescriptionHeight("short-campaign-description");
@@ -73,22 +77,24 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
 
     return(
         <div className="campaignDetail">
-            <div className="edit-description" id={campaignDescriptionHeight}>
+            <div className="edit-description">
                 {showDescriptionInput ?
                     <form autoComplete="off" onSubmit={editCampaign} className="campaign-description-form">
                         <label style={{color: 'black'}}>Edit Campaign Name:</label>
                         <input style={{color: 'black'}} type="text" onChange={(evt) => setCampaignName(evt.target.value)} value={campaignName} required />
                         <label style={{color: 'black'}}>Edit Campaign Description:</label>
                         <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} />
-                        <button type="submit">Save</button>
+                        <button style={{width: '5vw', alignSelf: 'center'}} type="submit">Save</button>
                     </form>
                     :
-                    <div className="description">
-                        {campaign.description ?
-                            <p>{campaign.description}</p>
-                            :
-                            <p>No description yet...</p>
-                        }
+                    <div>
+                        <div className="description" id={campaignDescriptionHeight}>
+                            {campaign.description ?
+                                <p>{campaign.description}</p>
+                                :
+                                <p>No description yet...</p>
+                            }
+                        </div>
                         <button onClick={() => showEditCampaign()}>Edit Campaign</button>
                     </div>
                 }
@@ -101,7 +107,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                     </tr>
                 </thead>
                     {campaign.sessionNote ?
-                        <tbody className="table-body">
+                        <tbody className="table-body" style={{maxHeight: '10vh'}}>
                             {campaign.sessionNote.map((n, idx) => (
                                 <tr key={idx}>
                                     <td className="note-link" onClick={() => openSessionNote(n)}>{n.title}</td>
@@ -116,12 +122,13 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
             {showSessionNoteInput ?
                 <form autoComplete="off" onSubmit={addCampaignNote} className="session-note-form">
                     <div className="label-input">
-                        <label style={{color: 'black'}}>Add Session Note:</label>
-                        <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
-                        <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
+                        <div className="inputs">
+                            <input type="text" name='title' onChange={(evt) => setCampaignNoteTitle(evt.target.value)} value={campaignNoteTitle} placeholder="Title" required />
+                            <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
+                        </div>
                         <textarea id="campaign-note-input" name='name' onChange={(evt) => setCampaignNote(evt.target.value)} value={campaignNote} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
-                    <div>
+                    <div className="session-note-buttons">
                         <button onClick={() => closeSessionNoteInput()}>Cancel</button>
                         <button type="submit">Add Note</button>
                     </div>
