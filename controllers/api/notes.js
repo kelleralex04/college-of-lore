@@ -8,6 +8,7 @@ module.exports = {
     addSubjectNote,
     editSubjectNote,
     deleteSessionNote,
+    deleteSubjectNote,
 };
 
 
@@ -53,4 +54,13 @@ async function deleteSessionNote(req, res) {
     campaign.save()
     const user = req.user._id
     res.json(user);
+}
+
+async function deleteSubjectNote(req, res) {
+    await Note.deleteOne({_id: req.params.subjectNoteId});
+    let subject = await Subject.findById(req.params.subjectId)
+    const noteIdx = subject.subjectNote.indexOf(req.params.subjectNoteId)
+    subject.subjectNote.splice(noteIdx, 1)
+    subject.save()
+    res.json(subject);
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import * as subjectsAPI from '../../utilities/subjects-api';
 import CampaignDetail from "../../components/CampaignDetail/CampaignDetail";
 import CategoryDetail from "../../components/CategoryDetail/CategoryDetail"
 import SubjectDetail from "../../components/SubjectDetail/SubjectDetail"
@@ -20,6 +21,14 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
         setShowSettings(true)
     }, [])
 
+    useEffect(function() {
+        async function getSubject() {
+            const updatedSubject = await subjectsAPI.populateSubject(subject._id)
+            setSubject(updatedSubject)
+        }
+        getSubject()
+    }, [subjectNote])
+
     return (
         <>
             {currentMain === 'CampaignDetail' && <CampaignDetail campaign={campaign} setCampaign={setCampaign} setCurrentMain={setCurrentMain} setSessionNote={setSessionNote}
@@ -35,7 +44,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             setCampaignNote={setCampaignNote} setCurrentMain={setCurrentMain} />}
             {currentMain === 'SubjectNoteDetail' && <SubjectNoteDetail subjectNote={subjectNote} setSubjectNote={setSubjectNote} subjectNoteContent={subjectNoteContent} 
             setSubjectNoteContent={setSubjectNoteContent} subjectNoteTitle={subjectNoteTitle} setSubjectNoteTitle={setSubjectNoteTitle} subjectNoteDate={subjectNoteDate}
-            setSubjectNoteDate={setSubjectNoteDate} />}
+            setSubjectNoteDate={setSubjectNoteDate} subject={subject} setCurrentMain={setCurrentMain} />}
             {currentMain === 'CampaignSettings' && <CampaignSettings campaign={campaign} />}
         </>
     )

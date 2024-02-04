@@ -11,6 +11,7 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
     const [subjectDescription, setSubjectDescription] = useState('')
     const [showSubjectDescriptionInput, setShowSubjectDescriptionInput] = useState(false)
     const [showSubjectWarning, setShowSubjectWarning] = useState(false)
+    const [subjectDescriptionHeight, setSubjectDescriptionHeight] = useState("tall-subject-description")
 
     async function addSubjectNote(evt) {
         evt.preventDefault();
@@ -20,6 +21,7 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
         setSubjectNoteTitle('');
         setSubjectNoteDate('');
         setShowSubjectNoteInput(false);
+        setSubjectDescriptionHeight('tall-subject-description')
     };
 
     async function editSubject(evt) {
@@ -43,14 +45,23 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
     }
 
     function openSubjectNoteInput() {
+        setShowSubjectDescriptionInput(false);
+        setSubjectDescriptionHeight('short-subject-description')
         setShowSubjectNoteInput(true)
         setSubjectNoteTitle('')
         setSubjectNoteContent('')
         setSubjectNoteDate('')
     }
 
+    function closeSubjectNoteInput() {
+        setShowSubjectNoteInput(false)
+        setSubjectDescriptionHeight('tall-subject-description')
+    }
+
     function showEditSubject() {
         setShowSubjectDescriptionInput(true);
+        setShowSubjectNoteInput(false)
+        setSubjectDescriptionHeight('tall-subject-description')
         setSubjectName(subject.name);
         setSubjectDescription(subject.description);
     }
@@ -70,9 +81,9 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                     {showSubjectDescriptionInput ?
                         <div className='top-elements'>
                             <form id='edit-subject-form' autoComplete="off" onSubmit={editSubject} className="subject-description-form">
-                                <label style={{color: 'black'}}>Edit File Name:</label>
+                                <label style={{color: 'black', marginTop: '3vh'}}>Edit File Name:</label>
                                 <input style={{color: 'black'}} type="text" onChange={(evt) => setSubjectName(evt.target.value)} value={subjectName} required />
-                                <label style={{color: 'black'}}>Edit File Description:</label>
+                                <label style={{color: 'black', marginTop: '3vh'}}>Edit File Description:</label>
                                 <textarea name='name' onChange={(evt) => setSubjectDescription(evt.target.value)} value={subjectDescription} placeholder="Lorem ipsum dolor sit amet..." />
                             </form>
                             <div className='edit-subject-buttons'>
@@ -93,8 +104,8 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                         :
                         <div>
                             <div style={{width: '100%'}}>
-                                <h1>{subject.name}</h1>
-                                <div className="subject-description">
+                                <h1 style={{margin: '1vh'}}>{subject.name}</h1>
+                                <div className="subject-description" id={subjectDescriptionHeight}>
                                     {subject.description ?
                                         <p>{subject.description}</p>
                                         :
@@ -136,10 +147,11 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                                     <input type="text" name='title' onChange={(evt) => setSubjectNoteTitle(evt.target.value)} value={subjectNoteTitle} placeholder="Title" required />
                                     <input type="date" name='date' onChange={(evt) => setSubjectNoteDate(evt.target.value)} value={subjectNoteDate} required />
                                 </div>
-                                <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
+                                <textarea id="subject-note-textarea" name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} 
+                                placeholder="Lorem ipsum dolor sit amet..." required />
                             </div>
                             <div className="subject-note-buttons">
-                                <button onClick={() => setShowSubjectNoteInput(false)}>Cancel</button>
+                                <button onClick={() => closeSubjectNoteInput()}>Cancel</button>
                                 <button type="submit">Add Note</button>
                             </div>
                         </form>

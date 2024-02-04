@@ -24,7 +24,7 @@ export default function CategoryLink({category, curCategory, setCurCategory, ope
                     <ul>
                         {curCategory.subject.map((s, idx) => (
                             <li key={idx}>
-                                <p className="sidenav-link" style={{'padding': '6px 8px 6px 0'}} onClick={() => openSubject(s)}>{s.name}</p>
+                                <p className="sidenav-link" style={{padding: '6px 8px 6px 0'}} onClick={() => openSubject(s)}>{s.name}</p>
                             </li>
                         ))}
                     </ul>

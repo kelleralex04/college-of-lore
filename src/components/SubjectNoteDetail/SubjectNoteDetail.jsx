@@ -3,8 +3,9 @@ import * as notesAPI from '../../utilities/notes-api';
 import './SubjectNoteDetail.css'
 
 export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectNoteContent, setSubjectNoteContent, subjectNoteTitle, setSubjectNoteTitle, 
-    subjectNoteDate, setSubjectNoteDate}) {
+    subjectNoteDate, setSubjectNoteDate, subject, setCurrentMain}) {
     const [showSubjectNoteInput, setShowSubjectNoteInput] = useState(false)
+    const [showSubjectNoteWarning, setShowSubjectNoteWarning] = useState(false)
     const [noteHeight, setNoteHeight] = useState('tall')
 
     async function editSubjectNote(evt) {
@@ -23,6 +24,11 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
         setNoteHeight('short')
     }
 
+    async function deleteSubjectNote() {
+        await notesAPI.deleteSubjectNote(subject._id, subjectNote._id)
+        setCurrentMain('SubjectDetail')
+    }
+
     return (
         <div className='edit-subject-note'>
             <div className="subject-note">
@@ -38,8 +44,17 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
                         </div>
                         <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
-                    <div>
+                    <div className='edit-buttons'>
                         <button type="submit">Save</button>
+                        {showSubjectNoteWarning ?
+                            <div style={{display: 'flex'}}>
+                                <label>Are you sure?</label>
+                                <button onClick={() => deleteSubjectNote()}>DELETE</button>
+                                <button onClick={() => setShowSubjectNoteWarning(false)}>Cancel Delete</button>
+                            </div>
+                            :
+                            <button onClick={() => setShowSubjectNoteWarning(true)}>Delete Note</button>
+                        }
                     </div>
                 </form>
                 :

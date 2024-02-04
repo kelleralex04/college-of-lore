@@ -80,9 +80,9 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
             <div className="edit-description">
                 {showDescriptionInput ?
                     <form autoComplete="off" onSubmit={editCampaign} className="campaign-description-form">
-                        <label style={{color: 'black'}}>Edit Campaign Name:</label>
+                        <label style={{color: 'black', marginTop: '3vh'}}>Edit Campaign Name:</label>
                         <input style={{color: 'black'}} type="text" onChange={(evt) => setCampaignName(evt.target.value)} value={campaignName} required />
-                        <label style={{color: 'black'}}>Edit Campaign Description:</label>
+                        <label style={{color: 'black', marginTop: '3vh'}}>Edit Campaign Description:</label>
                         <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} />
                         <button style={{width: '5vw', alignSelf: 'center'}} type="submit">Save</button>
                     </form>
@@ -90,7 +90,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                     <div>
                         <div className="description" id={campaignDescriptionHeight}>
                             {campaign.description ?
-                                <p>{campaign.description}</p>
+                                <p style={{marginTop: '3vh'}}>{campaign.description}</p>
                                 :
                                 <p>No description yet...</p>
                             }

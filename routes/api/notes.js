@@ -7,5 +7,6 @@ router.post('/campaign/:sessionNoteId/:noteTitleId/:noteDateId/:noteContentId', 
 router.post('/subject/:subjectId/note/:noteTitleId/:noteDateId/:noteContentId', notesCtrl.addSubjectNote);
 router.post('/subject/:subjectNoteId/:noteTitleId/:noteDateId/:noteContentId', notesCtrl.editSubjectNote);
 router.delete('/campaign/:campaignId/note/:sessionNoteId', notesCtrl.deleteSessionNote);
+router.delete('/subject/:subjectId/note/:subjectNoteId', notesCtrl.deleteSubjectNote);
 
 module.exports = router;

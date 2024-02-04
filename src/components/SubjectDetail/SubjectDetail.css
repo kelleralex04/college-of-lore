@@ -8,14 +8,50 @@
     width: 20vw;
 }
 
+.file-detail p {
+    font-size: 2vmin;
+    white-space: pre;
+    text-wrap: wrap;
+}
+
 .file-detail textarea {
     width: 100%;
-    height: 37.3vh;
+    height: 38.3vh;
     font-family: "IM Fell Double Pica", serif;
     font-weight: 400;
     font-style: normal;
     font-size: 2vmin;
     resize: none;
+}
+
+.file-top-elements {
+    width: 100%;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+#tall-subject-description {
+    max-height: 52vh;
+}
+
+#short-subject-description {
+    max-height: 15vh;
+}
+
+.edit-subject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 2px;
+    border-style: none none solid none;
+    border-color: var(--border);
 }
 
 .add-subject-note {
@@ -36,7 +72,7 @@
 .table-body {
     display: block;
     overflow: auto;
-    max-height: 20vh;
+    max-height: 10vh;
 }
 
 .table-body tr {
@@ -54,4 +90,33 @@
     width: 15vw;
     justify-content: space-between;
     align-self: center;
+}
+
+.subject-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 35.5vh;
+    width: 100%;
+    overflow: auto;
+    padding: 0 2vw 0 2vw;
+}
+
+.subject-description-form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 58vh;
+    padding: 0 10px;
+}
+
+.file-bottom-elements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#subject-note-textarea {
+    height: 28vh;
 }
