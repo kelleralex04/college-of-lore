@@ -12,7 +12,7 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
         const updatedNote = await notesAPI.editSubjectNote(subjectNote._id, subjectNoteTitle, subjectNoteDate, subjectNoteContent.replace(/\n/g, '<br>'));
         setSubjectNote(updatedNote)
         setShowSubjectNoteInput(false)
-        setNoteHeight('short')
+        setNoteHeight('tall')
     };
 
     function openSubjectNoteInput() {
@@ -21,11 +21,6 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
         setSubjectNoteDate(subjectNote.date)
         setSubjectNoteTitle(subjectNote.title)
         setNoteHeight('short')
-    }
-
-    function closeSubjectNoteInput() {
-        setShowSubjectNoteInput(false)
-        setNoteHeight('tall')
     }
 
     return (
@@ -44,12 +39,11 @@ export default function SubjectNoteDetail({subjectNote, setSubjectNote, subjectN
                         <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
                     <div>
-                        <button onClick={() => closeSubjectNoteInput()}>Cancel</button>
-                        <button type="submit">Edit Note</button>
+                        <button type="submit">Save</button>
                     </div>
                 </form>
                 :
-                <button style={{marginTop: '3vh'}} onClick={() => openSubjectNoteInput()}>Edit Subject Note</button>
+                <button style={{marginTop: '3vh'}} onClick={() => openSubjectNoteInput()}>Edit Note</button>
             }
         </div>
     )

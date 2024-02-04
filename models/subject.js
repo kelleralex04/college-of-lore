@@ -7,6 +7,7 @@ const subjectSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Note',
     }],
+    description: String,
     link: [String]
 }, {
     timestamps: true
