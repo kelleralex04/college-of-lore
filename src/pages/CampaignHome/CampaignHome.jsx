@@ -7,7 +7,7 @@ import SubjectNoteDetail from "../../components/SubjectNoteDetail/SubjectNoteDet
 import CampaignSettings from "../../components/CampaignSettings/CampaignSettings";
 
 export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote, subject, setSubject, subjectAdded, 
-    setShowSettings}) {
+    setShowSettings, showCategoryDescriptionInput, setShowCategoryDescriptionInput}) {
     const [campaignNoteTitle, setCampaignNoteTitle] = useState('')
     const [campaignNoteDate, setCampaignNoteDate] = useState('')
     const [campaignNote, setCampaignNote] = useState('')
@@ -26,7 +26,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             campaignNoteTitle={campaignNoteTitle} setCampaignNoteTitle={setCampaignNoteTitle} campaignNoteDate={campaignNoteDate} setCampaignNoteDate={setCampaignNoteDate}
             campaignNote={campaignNote} setCampaignNote={setCampaignNote} />}
             {currentMain === 'CategoryDetail' && <CategoryDetail campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} setCurrentMain={setCurrentMain} 
-            setSubject={setSubject} subjectAdded={subjectAdded} />}
+            setSubject={setSubject} subjectAdded={subjectAdded} showCategoryDescriptionInput={showCategoryDescriptionInput} setShowCategoryDescriptionInput={setShowCategoryDescriptionInput} />}
             {currentMain === 'SubjectDetail' && <SubjectDetail subject={subject} setSubject={setSubject} setCurrentMain={setCurrentMain} setSubjectNote={setSubjectNote} 
             subjectNoteContent={subjectNoteContent} setSubjectNoteContent={setSubjectNoteContent} subjectNoteTitle={subjectNoteTitle} setSubjectNoteTitle={setSubjectNoteTitle} 
             subjectNoteDate={subjectNoteDate} setSubjectNoteDate={setSubjectNoteDate} />}

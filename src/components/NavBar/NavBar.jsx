@@ -6,7 +6,7 @@ import * as categoriesAPI from '../../utilities/categories-api';
 import * as subjectsAPI from '../../utilities/subjects-api';
 import './NavBar.css'
 
-export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject, showSettings}) {
+export default function NavBar({setUser, curCampaign, curCategory, setCurCategory, setCurrentMain, setCategory, setSubject, showSettings, setShowCategoryDescriptionInput}) {
     const [showInput, setShowInput] = useState(false)
     const [newCategory, setNewCategory] = useState('')
 
@@ -26,6 +26,7 @@ export default function NavBar({setUser, curCampaign, curCategory, setCurCategor
     async function openCategory(c) {
         const updatedCategory = await categoriesAPI.populateCategory(c._id)
         setCategory(updatedCategory)
+        setShowCategoryDescriptionInput(false)
         setCurrentMain('CategoryDetail')
     }
 

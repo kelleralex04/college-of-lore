@@ -4,10 +4,9 @@ import * as categoriesAPI from '../../utilities/categories-api';
 import * as subjectsAPI from '../../utilities/subjects-api';
 import './CategoryDetail.css'
 
-export default function CategoryDetail({campaign, setCampaign, category, setCategory, setCurrentMain, setSubject}) {
+export default function CategoryDetail({campaign, setCampaign, category, setCategory, setCurrentMain, setSubject, showCategoryDescriptionInput, setShowCategoryDescriptionInput}) {
     const [categoryName, setCategoryName] = useState('')
     const [categoryDescription, setCategoryDescription] = useState('')
-    const [showCategoryDescriptionInput, setShowCategoryDescriptionInput] = useState(false)
     const [showCategoryWarning, setShowCategoryWarning] = useState(false)
 
     async function editCategory(evt) {
@@ -54,7 +53,7 @@ export default function CategoryDetail({campaign, setCampaign, category, setCate
                             <label style={{color: 'black'}}>Edit Folder Description:</label>
                             <textarea name='name' onChange={(evt) => setCategoryDescription(evt.target.value)} value={categoryDescription} placeholder="Lorem ipsum dolor sit amet..." />
                         </form>
-                        <div>
+                        <div className='edit-category-buttons'>
                             <button type="submit" form='edit-category-form'>Save</button>
                             {showCategoryWarning ?
                                 <div className='delete-category-warning'>

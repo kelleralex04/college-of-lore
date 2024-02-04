@@ -88,3 +88,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+.edit-category-buttons {
+    display: flex;
+    width: 15vw;
+    justify-content: space-between;
+    align-self: center;
+}

@@ -61,7 +61,7 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                             </div>
                             <textarea name='name' onChange={(evt) => setSubjectNoteContent(evt.target.value)} value={subjectNoteContent} placeholder="Lorem ipsum dolor sit amet..." required />
                         </div>
-                        <div>
+                        <div className="subject-note-buttons">
                             <button onClick={() => setShowSubjectNoteInput(false)}>Cancel</button>
                             <button type="submit">Add Note</button>
                         </div>

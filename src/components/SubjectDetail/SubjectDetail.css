@@ -19,7 +19,9 @@
 }
 
 .add-subject-note {
-    width: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .label-input {
@@ -45,4 +47,11 @@
 .header-row {
     width: 100%;
     display: inline-table;
+}
+
+.subject-note-buttons {
+    display: flex;
+    width: 15vw;
+    justify-content: space-between;
+    align-self: center;
 }
