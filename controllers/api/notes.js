@@ -7,6 +7,7 @@ module.exports = {
     editCampaignNote,
     addSubjectNote,
     editSubjectNote,
+    deleteSessionNote,
 };
 
 
@@ -42,4 +43,14 @@ async function editSubjectNote(req, res) {
     )
     const note = await Note.findById(req.params.subjectNoteId)
     res.json(note);
+}
+
+async function deleteSessionNote(req, res) {
+    await Note.deleteOne({_id: req.params.sessionNoteId});
+    let campaign = await Campaign.findById(req.params.campaignId)
+    const noteIdx = campaign.sessionNote.indexOf(req.params.sessionNoteId)
+    campaign.sessionNote.splice(noteIdx, 1)
+    campaign.save()
+    const user = req.user._id
+    res.json(user);
 }

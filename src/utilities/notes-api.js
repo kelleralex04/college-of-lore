@@ -17,3 +17,7 @@ export function addSubjectNote(subject, subjectNoteTitle, subjectNoteDate, subje
 export function editSubjectNote(subjectNoteId, subjectNoteTitle, subjectNoteDate, subjectNote) {
     return sendRequest(`${BASE_URL}/subject/${subjectNoteId}/${subjectNoteTitle}/${subjectNoteDate}/${subjectNote}`, 'POST');
 }
+
+export function deleteSessionNote(campaignId, sessionNoteId) {
+    return sendRequest(`${BASE_URL}/campaign/${campaignId}/note/${sessionNoteId}`, 'DELETE');
+}

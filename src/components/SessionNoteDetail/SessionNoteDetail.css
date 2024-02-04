@@ -41,3 +41,9 @@
 #short {
     max-height: 35vh;
 }
+
+.edit-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

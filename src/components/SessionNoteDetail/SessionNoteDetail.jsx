@@ -2,8 +2,10 @@ import { useState } from 'react'
 import * as notesAPI from '../../utilities/notes-api';
 import './SessionNoteDetail.css'
 
-export default function SessionNoteDetail({sessionNote, setSessionNote, campaignNote, setCampaignNote, campaignNoteTitle, setCampaignNoteTitle, campaignNoteDate, setCampaignNoteDate}) {
+export default function SessionNoteDetail({campaign, sessionNote, setSessionNote, campaignNote, setCampaignNote, campaignNoteTitle, setCampaignNoteTitle, campaignNoteDate, 
+    setCampaignNoteDate, setCurrentMain}) {
     const [showSessionNoteInput, setShowSessionNoteInput] = useState(false)
+    const [showSessionNoteWarning, setShowSessionNoteWarning] = useState(false)
     const [noteHeight, setNoteHeight] = useState('tall')
 
     async function editCampaignNote(evt) {
@@ -11,7 +13,7 @@ export default function SessionNoteDetail({sessionNote, setSessionNote, campaign
         const updatedNote = await notesAPI.editCampaignNote(sessionNote._id, campaignNoteTitle, campaignNoteDate, campaignNote.replace(/\n/g, '<br>'));
         setSessionNote(updatedNote)
         setShowSessionNoteInput(false)
-        setNoteHeight('short')
+        setNoteHeight('tall')
     };
 
     function openSessionNoteInput() {
@@ -22,9 +24,9 @@ export default function SessionNoteDetail({sessionNote, setSessionNote, campaign
         setNoteHeight('short')
     }
 
-    function closeSessionNoteInput() {
-        setShowSessionNoteInput(false)
-        setNoteHeight('tall')
+    async function deleteSessionNote() {
+        await notesAPI.deleteSessionNote(campaign._id, sessionNote._id)
+        setCurrentMain('CampaignDetail')
     }
 
     return(
@@ -41,9 +43,17 @@ export default function SessionNoteDetail({sessionNote, setSessionNote, campaign
                         <input type="date" name='date' onChange={(evt) => setCampaignNoteDate(evt.target.value)} value={campaignNoteDate} required />
                         <textarea name='name' onChange={(evt) => setCampaignNote(evt.target.value)} value={campaignNote} placeholder="Lorem ipsum dolor sit amet..." required />
                     </div>
-                    <div>
-                        <button onClick={() => closeSessionNoteInput()}>Cancel</button>
-                        <button type="submit">Edit Note</button>
+                    <div className='edit-buttons'>
+                        <button type="submit">Save</button>
+                        {showSessionNoteWarning ?
+                            <div style={{display: 'flex'}}>
+                                <label>Are you sure?</label>
+                                <button onClick={() => deleteSessionNote()}>DELETE</button>
+                                <button onClick={() => setShowSessionNoteWarning(false)}>Cancel Delete</button>
+                            </div>
+                            :
+                            <button onClick={() => setShowSessionNoteWarning(true)}>Delete Note</button>
+                        }
                     </div>
                 </form>
                 :

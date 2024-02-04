@@ -30,9 +30,9 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             {currentMain === 'SubjectDetail' && <SubjectDetail subject={subject} setSubject={setSubject} setCurrentMain={setCurrentMain} setSubjectNote={setSubjectNote} 
             subjectNoteContent={subjectNoteContent} setSubjectNoteContent={setSubjectNoteContent} subjectNoteTitle={subjectNoteTitle} setSubjectNoteTitle={setSubjectNoteTitle} 
             subjectNoteDate={subjectNoteDate} setSubjectNoteDate={setSubjectNoteDate} />}
-            {currentMain === 'SessionNoteDetail' && <SessionNoteDetail sessionNote={sessionNote} setSessionNote={setSessionNote} campaignNoteTitle={campaignNoteTitle} 
+            {currentMain === 'SessionNoteDetail' && <SessionNoteDetail campaign={campaign} sessionNote={sessionNote} setSessionNote={setSessionNote} campaignNoteTitle={campaignNoteTitle} 
             setCampaignNoteTitle={setCampaignNoteTitle} campaignNoteDate={campaignNoteDate} setCampaignNoteDate={setCampaignNoteDate} campaignNote={campaignNote} 
-            setCampaignNote={setCampaignNote} />}
+            setCampaignNote={setCampaignNote} setCurrentMain={setCurrentMain} />}
             {currentMain === 'SubjectNoteDetail' && <SubjectNoteDetail subjectNote={subjectNote} setSubjectNote={setSubjectNote} subjectNoteContent={subjectNoteContent} 
             setSubjectNoteContent={setSubjectNoteContent} subjectNoteTitle={subjectNoteTitle} setSubjectNoteTitle={setSubjectNoteTitle} subjectNoteDate={subjectNoteDate}
             setSubjectNoteDate={setSubjectNoteDate} />}
