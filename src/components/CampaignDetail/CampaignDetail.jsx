@@ -138,10 +138,10 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                             <button style={{width: '5vw', alignSelf: 'center'}} type="submit">Save</button>
                         </form>
                         :
-                        <div>
+                        <div className="description-container">
                             <div className="description" id={campaignDescriptionHeight}>
                                 {campaign.description ?
-                                    <p style={{marginTop: '3vh'}}>{campaign.description}</p>
+                                    <p className="description-text" style={{marginTop: '3vh'}}>{campaign.description}</p>
                                     :
                                     <p>No description yet...</p>
                                 }

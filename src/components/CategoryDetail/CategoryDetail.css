@@ -12,7 +12,7 @@
 
 .category-detail p {
     font-size: 2vmin;
-    white-space: pre;
+    white-space: pre-wrap;
     text-wrap: wrap;
 }
 
