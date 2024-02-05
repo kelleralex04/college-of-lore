@@ -92,7 +92,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
     
         const formData = new FormData();
         formData.append("s3Images", file)
-        const result = await fetch(`http://localhost:3000/image/upload/${campaign._id}/${imageName}`, {method: 'POST', body: formData})
+        const result = await fetch(`http://localhost:3001/image/upload/${campaign._id}/${imageName}`, {method: 'POST', body: formData})
         const data = await result.json()
         const updatedCampaign = await campaignsAPI.addImage(campaign._id, data.files[0].location.slice(61))
         setCampaign(updatedCampaign)
