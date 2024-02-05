@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import * as subjectsAPI from '../../utilities/subjects-api';
 import CampaignDetail from "../../components/CampaignDetail/CampaignDetail";
 import CategoryDetail from "../../components/CategoryDetail/CategoryDetail"
 import SubjectDetail from "../../components/SubjectDetail/SubjectDetail"
@@ -20,14 +19,6 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
     useEffect(function() {
         setShowSettings(true)
     }, [])
-
-    useEffect(function() {
-        async function getSubject() {
-            const updatedSubject = await subjectsAPI.populateSubject(subject._id)
-            setSubject(updatedSubject)
-        }
-        getSubject()
-    }, [subjectNote])
 
     return (
         <>

@@ -91,7 +91,14 @@
 
 .edit-category-buttons {
     display: flex;
-    width: 15vw;
+    width: 25vw;
     justify-content: space-between;
     align-self: center;
+}
+
+.delete-confirm {
+    display: flex;
+    align-items: center;
+    width: 20vw;
+    justify-content: space-between;
 }

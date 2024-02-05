@@ -57,8 +57,8 @@ export default function CategoryDetail({campaign, setCampaign, category, setCate
                             <button type="submit" form='edit-category-form'>Save</button>
                             {showCategoryWarning ?
                                 <div className='delete-category-warning'>
-                                    <p>Are you sure?</p>
-                                    <div>
+                                    <div className='delete-confirm'>
+                                        <p>Are you sure?</p>
                                         <button onClick={() => deleteCategory()}>DELETE</button>
                                         <button onClick={() => setShowCategoryWarning(false)}>Cancel</button>
                                     </div>

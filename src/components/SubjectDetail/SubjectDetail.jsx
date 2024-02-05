@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as categoriesAPI from '../../utilities/categories-api';
 import * as subjectsAPI from '../../utilities/subjects-api';
 import * as notesAPI from '../../utilities/notes-api';
@@ -12,6 +12,14 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
     const [showSubjectDescriptionInput, setShowSubjectDescriptionInput] = useState(false)
     const [showSubjectWarning, setShowSubjectWarning] = useState(false)
     const [subjectDescriptionHeight, setSubjectDescriptionHeight] = useState("tall-subject-description")
+
+    useEffect(function() {
+        async function getCurSubject() {
+            const curSubject = await subjectsAPI.populateSubject(subject._id)
+            setSubject(curSubject)
+        }
+        getCurSubject()
+    }, [])
 
     async function addSubjectNote(evt) {
         evt.preventDefault();
@@ -90,8 +98,8 @@ export default function SubjectDetail({subject, setSubject, setCurrentMain, setS
                                 <button type="submit" form='edit-subject-form'>Save</button>
                                 {showSubjectWarning ?
                                     <div className='delete-subject-warning'>
-                                        <p>Are you sure?</p>
-                                        <div>
+                                        <div className='delete-confirm'>
+                                            <p>Are you sure?</p>
                                             <button onClick={() => deleteSubject()}>DELETE</button>
                                             <button onClick={() => setShowSubjectWarning(false)}>Cancel</button>
                                         </div>
