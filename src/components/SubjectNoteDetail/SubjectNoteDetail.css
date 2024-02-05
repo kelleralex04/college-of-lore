@@ -24,7 +24,7 @@
 
 .subject-note p {
     padding: 2vh 3vw 2vh;
-    overflow: auto;
+    overflow-y: auto;
     font-size: 2vmin;
     white-space: pre;
     text-wrap: wrap;
