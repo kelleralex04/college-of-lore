@@ -16,7 +16,11 @@ const campaignSchema = new Schema({
         ref: 'Note',
     }],
     name: { type: String, required: true },
-    description: String
+    description: String,
+    image: [{
+        name: String,
+        imageId: String
+    }],
 }, {
     timestamps: true
 });

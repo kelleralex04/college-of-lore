@@ -107,3 +107,11 @@
     justify-content: space-between;
     align-self: center;
 }
+
+.bottom-divs {
+    display: flex;
+}
+
+.image-name {
+    cursor: pointer;
+}

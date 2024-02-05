@@ -29,3 +29,7 @@ export function addCampaignNote(campaign, campaignNote) {
 export function deleteCampaign(campaignId) {
     return sendRequest(`${BASE_URL}/${campaignId}`, 'DELETE')
 }
+
+export function addImage(campaignId, imageId) {
+    return sendRequest(`${BASE_URL}/${campaignId}/image/${imageId}`, 'POST');
+}
