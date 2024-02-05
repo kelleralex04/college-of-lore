@@ -5,7 +5,6 @@ import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../CampaignHome/CampaignHome'
 import CampaignIndex from '../CampaignIndex/CampaignIndex'
 import Header from '../../components/Header/Header'
-import S3upload from '../S3upload/S3upload'
 import { Routes, Route } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import * as campaignsAPI from '../../utilities/campaigns-api';
@@ -40,7 +39,6 @@ export default function App() {
               <Route path="/campaign/:campaignId" element={<HomePage campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} currentMain={currentMain} 
               setCurrentMain={setCurrentMain} sessionNote={sessionNote} setSessionNote={setSessionNote} subject={subject} setSubject={setSubject} setShowSettings={setShowSettings}
               showCategoryDescriptionInput={showCategoryDescriptionInput} setShowCategoryDescriptionInput={setShowCategoryDescriptionInput} />} />
-              <Route path="/s3upload" element={<S3upload />} />
             </Routes>
           </div>
         </>
