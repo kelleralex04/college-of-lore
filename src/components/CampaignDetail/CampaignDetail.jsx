@@ -5,7 +5,7 @@ import * as notesAPI from '../../utilities/notes-api';
 import './CampaignDetail.css'
 
 export default function CampaignDetail({campaign, setCampaign, setCurrentMain, setSessionNote, campaignNote, setCampaignNote, campaignNoteTitle, setCampaignNoteTitle, campaignNoteDate, 
-    setCampaignNoteDate}) {
+    setCampaignNoteDate, curImage, setCurImage}) {
     let { campaignId } = useParams();
     
     const [campaignName, setCampaignName] = useState('')
@@ -13,10 +13,11 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
     const [showDescriptionInput, setShowDescriptionInput] = useState(false)
     const [showSessionNoteInput, setShowSessionNoteInput] = useState(false)
     const [campaignDescriptionHeight, setCampaignDescriptionHeight] = useState("tall-campaign-description")
+    const [sessionNoteListHeight, setSessionNoteListHeight] = useState('tall-note-list')
+    const [imageListHeight, setImageListHeight] = useState('short-image-list')
     const [file, setFile] = useState(null)
     const [imageName, setImageName] = useState('')
     const [showImage, setShowImage] = useState(false)
-    const [curImage, setCurImage] = useState(null)
 
     useEffect(function() {
         async function getCurCampaign(campaignId) {
@@ -48,6 +49,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setCampaignNoteDate('');
         setShowSessionNoteInput(false);
         setCampaignDescriptionHeight("tall-campaign-description");
+        setSessionNoteListHeight("tall-note-list");
     };
 
 
@@ -55,6 +57,8 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setShowDescriptionInput(true);
         setShowSessionNoteInput(false);
         setCampaignDescriptionHeight("tall-campaign-description");
+        setSessionNoteListHeight("tall-note-list");
+        setImageListHeight("short-image-list");
         setCampaignName(campaign.name)
         setCampaignDescription(campaign.description);
     }
@@ -72,11 +76,15 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setShowDescriptionInput(false);
         setShowSessionNoteInput(true);
         setCampaignDescriptionHeight("short-campaign-description");
+        setSessionNoteListHeight("short-note-list");
+        setImageListHeight("tall-image-list");
     }
 
     function closeSessionNoteInput() {
         setShowSessionNoteInput(false);
         setCampaignDescriptionHeight("tall-campaign-description");
+        setSessionNoteListHeight("tall-note-list");
+        setImageListHeight("short-image-list");
     }
 
     async function submit(evt) {
@@ -102,55 +110,70 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
         setCurImage(i.imageId)
     }
 
+    async function deleteImage() {
+        const updatedCampaign = await campaignsAPI.deleteImage(campaign._id, curImage)
+        setCampaign(updatedCampaign)
+        setShowImage(false)
+    }
+
     return(
         <div className="campaignDetail">
-            <div className="edit-description">
-                {showDescriptionInput ?
-                    <form autoComplete="off" onSubmit={editCampaign} className="campaign-description-form">
-                        <label style={{color: 'black', marginTop: '3vh'}}>Edit Campaign Name:</label>
-                        <input style={{color: 'black'}} type="text" onChange={(evt) => setCampaignName(evt.target.value)} value={campaignName} required />
-                        <label style={{color: 'black', marginTop: '3vh'}}>Edit Campaign Description:</label>
-                        <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} />
-                        <button style={{width: '5vw', alignSelf: 'center'}} type="submit">Save</button>
-                    </form>
-                    :
-                    <div>
-                        <div className="description" id={campaignDescriptionHeight}>
-                            {campaign.description ?
-                                <p style={{marginTop: '3vh'}}>{campaign.description}</p>
-                                :
-                                <p>No description yet...</p>
-                            }
-                        </div>
-                        <button onClick={() => showEditCampaign()}>Edit Campaign</button>
+            {showImage ?
+                <div className="image-container">
+                    <img className="image" id={campaignDescriptionHeight} src={`https://college-of-lore-seir-1030.s3.us-west-2.amazonaws.com/${curImage}`} alt="" />
+                    <div className="image-buttons">
+                        <button onClick={() => setCurrentMain('FullscreenImage')}>Fullscreen</button>
+                        <button onClick={() => setShowImage(false)}>Close Image</button>
+                        <button onClick={() => deleteImage()}>Delete Image</button>
                     </div>
-                }
-            </div>
+                </div>
+                :
+                <div className="edit-description">
+                    {showDescriptionInput ?
+                        <form autoComplete="off" onSubmit={editCampaign} className="campaign-description-form">
+                            <label style={{color: 'black', marginTop: '1vh'}}>Edit Campaign Name:</label>
+                            <input style={{color: 'black'}} type="text" onChange={(evt) => setCampaignName(evt.target.value)} value={campaignName} required />
+                            <label style={{color: 'black', marginTop: '1vh'}}>Edit Campaign Description:</label>
+                            <textarea name='name' onChange={(evt) => setCampaignDescription(evt.target.value)} value={campaignDescription} />
+                            <button style={{width: '5vw', alignSelf: 'center'}} type="submit">Save</button>
+                        </form>
+                        :
+                        <div>
+                            <div className="description" id={campaignDescriptionHeight}>
+                                {campaign.description ?
+                                    <p style={{marginTop: '3vh'}}>{campaign.description}</p>
+                                    :
+                                    <p>No description yet...</p>
+                                }
+                            </div>
+                            <button onClick={() => showEditCampaign()}>Edit Campaign</button>
+                        </div>
+                    }
+                </div>
+            }
             <div className="bottom-divs">
                 <div className="image-upload-div">
-                    <h1>Images</h1>
                     <div className="uploadImageContainer">
-                        <form onSubmit={submit}>
-                            <input type="text" name="name" onChange={(evt) => setImageName(evt.target.value)} value={imageName} placeholder="Image Name" required />
-                            <input onChange={fileSelected} type="file" accept="image/*" name='image'></input>
+                        {campaign.image ?
+                            <div className="image-list">
+                                <h4 style={{margin: '1vh 0'}}>Images</h4>
+                                <div className="image-items" id={imageListHeight}>
+                                    {campaign.image.map((i, idx) => (
+                                        <div className="image-name" onClick={() => openImage(i)} key={idx}>{i.name}</div>
+                                    ))}
+                                </div>
+                            </div>
+                            :
+                            <></>
+                        }
+                        <form onSubmit={submit} className="image-upload-form">
+                            <div className="image-upload-inputs">
+                                <input type="text" name="name" onChange={(evt) => setImageName(evt.target.value)} value={imageName} placeholder="Image Name" required />
+                                <input onChange={fileSelected} type="file" accept="image/*" name='image'></input>
+                            </div>
                             <button type="submit">Submit</button>
                         </form>
                     </div>
-                    {campaign.image ?
-                        <div>
-                            {campaign.image.map((i, idx) => (
-                                <div className="image-name" onClick={() => openImage(i)} key={idx}>{i.name}</div>
-                                // <img src={`https://college-of-lore-seir-1030.s3.us-west-2.amazonaws.com/${i}`} alt="" />
-                            ))}
-                        </div>
-                        :
-                        <h1>No images yet...</h1>
-                    }
-                    {showImage ?
-                        <img src={`https://college-of-lore-seir-1030.s3.us-west-2.amazonaws.com/${curImage}`} alt="" />
-                        :
-                        <></>
-                    }
                 </div>
                 <div className="session-note-div">
                     <table className="session-note-table">
@@ -161,7 +184,7 @@ export default function CampaignDetail({campaign, setCampaign, setCurrentMain, s
                             </tr>
                         </thead>
                             {campaign.sessionNote ?
-                                <tbody className="table-body" style={{maxHeight: '10vh'}}>
+                                <tbody className="table-body" id={sessionNoteListHeight}>
                                     {campaign.sessionNote.map((n, idx) => (
                                         <tr key={idx}>
                                             <td className="note-link" onClick={() => openSessionNote(n)}>{n.title}</td>

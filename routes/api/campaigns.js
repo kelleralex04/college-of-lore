@@ -9,5 +9,6 @@ router.post('/:campaignId/name/:name/description/:description', campaignsCtrl.ed
 router.post('/:campaignId/name/:name', campaignsCtrl.editCampaignTitle);
 router.delete('/:campaignId', campaignsCtrl.deleteCampaign);
 router.post('/:campaignId/image/:imageId', campaignsCtrl.addImage);
+router.delete('/:campaignId/image/:imageId', campaignsCtrl.deleteImage);
 
 module.exports = router;

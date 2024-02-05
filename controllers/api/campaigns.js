@@ -45,6 +45,7 @@ module.exports = {
     deleteCampaign,
     addImage,
     uploadImage,
+    deleteImage,
 };
 
 async function getCampaignList(req, res) {
@@ -121,4 +122,12 @@ async function uploadImage(req, res) {
         }
         res.json({msg: 'files uploaded successfully', files: req.files})
     })
+}
+
+async function deleteImage(req, res) {
+    const campaign = await Campaign.findById(req.params.campaignId).populate('category').populate('sessionNote');
+    const imageIdx = campaign.image.map(i => i.imageId).indexOf(req.params.imageId)
+    campaign.image.splice(imageIdx, 1)
+    campaign.save()
+    res.json(campaign)
 }

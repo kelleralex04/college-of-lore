@@ -5,6 +5,7 @@ import SubjectDetail from "../../components/SubjectDetail/SubjectDetail"
 import SessionNoteDetail from "../../components/SessionNoteDetail/SessionNoteDetail"
 import SubjectNoteDetail from "../../components/SubjectNoteDetail/SubjectNoteDetail";
 import CampaignSettings from "../../components/CampaignSettings/CampaignSettings";
+import FullscreenImage from "../../components/FullscreenImage/FullscreenImage";
 
 export default function CampaignHome({campaign, setCampaign, category, setCategory, currentMain, setCurrentMain, sessionNote, setSessionNote, subject, setSubject, subjectAdded, 
     setShowSettings, showCategoryDescriptionInput, setShowCategoryDescriptionInput}) {
@@ -15,6 +16,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
     const [subjectNoteContent, setSubjectNoteContent] = useState('')
     const [subjectNoteTitle, setSubjectNoteTitle] = useState('')
     const [subjectNoteDate, setSubjectNoteDate] = useState('')
+    const [curImage, setCurImage] = useState(null)
 
     useEffect(function() {
         setShowSettings(true)
@@ -24,7 +26,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
         <>
             {currentMain === 'CampaignDetail' && <CampaignDetail campaign={campaign} setCampaign={setCampaign} setCurrentMain={setCurrentMain} setSessionNote={setSessionNote}
             campaignNoteTitle={campaignNoteTitle} setCampaignNoteTitle={setCampaignNoteTitle} campaignNoteDate={campaignNoteDate} setCampaignNoteDate={setCampaignNoteDate}
-            campaignNote={campaignNote} setCampaignNote={setCampaignNote} />}
+            campaignNote={campaignNote} setCampaignNote={setCampaignNote} curImage={curImage} setCurImage={setCurImage} />}
             {currentMain === 'CategoryDetail' && <CategoryDetail campaign={campaign} setCampaign={setCampaign} category={category} setCategory={setCategory} setCurrentMain={setCurrentMain} 
             setSubject={setSubject} subjectAdded={subjectAdded} showCategoryDescriptionInput={showCategoryDescriptionInput} setShowCategoryDescriptionInput={setShowCategoryDescriptionInput} />}
             {currentMain === 'SubjectDetail' && <SubjectDetail subject={subject} setSubject={setSubject} setCurrentMain={setCurrentMain} setSubjectNote={setSubjectNote} 
@@ -37,6 +39,7 @@ export default function CampaignHome({campaign, setCampaign, category, setCatego
             setSubjectNoteContent={setSubjectNoteContent} subjectNoteTitle={subjectNoteTitle} setSubjectNoteTitle={setSubjectNoteTitle} subjectNoteDate={subjectNoteDate}
             setSubjectNoteDate={setSubjectNoteDate} subject={subject} setCurrentMain={setCurrentMain} />}
             {currentMain === 'CampaignSettings' && <CampaignSettings campaign={campaign} />}
+            {currentMain === 'FullscreenImage' && <FullscreenImage curImage={curImage} setCurrentMain={setCurrentMain} />}
         </>
     )
 }

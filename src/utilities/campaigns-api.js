@@ -33,3 +33,8 @@ export function deleteCampaign(campaignId) {
 export function addImage(campaignId, imageId) {
     return sendRequest(`${BASE_URL}/${campaignId}/image/${imageId}`, 'POST');
 }
+
+export function deleteImage(campaignId, imageId) {
+    return sendRequest(`${BASE_URL}/${campaignId}/image/${imageId}`, 'DELETE');
+}
+
