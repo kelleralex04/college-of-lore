@@ -23,7 +23,7 @@
 }
 
 .session-note {
-    width: 100%;
+    max-width: 100%;
 }
 
 .session-note p {

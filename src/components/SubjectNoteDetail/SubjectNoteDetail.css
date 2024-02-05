@@ -19,7 +19,7 @@
 }
 
 .subject-note {
-    width: 100%;
+    max-width: 100%;
 }
 
 .subject-note p {
