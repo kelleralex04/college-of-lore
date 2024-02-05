@@ -6,17 +6,8 @@ const logger = require('morgan');
 require('dotenv').config();
 require('./config/database');
 
-// Require the Mongoose models
-// const User = require('./models/user');
-// const Item = require('./models/item');
-// const Category = require('./models/category');
-// const Order = require('./models/order');
-
-// Local variables will come in handy for holding retrieved documents
-// let user, item, category, order;
-// let users, items, categories, orders;
-
 const app = express();
+const s3Router = require('./s3upload.js')
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -31,6 +22,7 @@ app.use('/api/campaigns', ensureLoggedIn, require('./routes/api/campaigns'));
 app.use('/api/categories', ensureLoggedIn, require('./routes/api/categories'));
 app.use('/api/subjects', ensureLoggedIn, require('./routes/api/subjects'));
 app.use('/api/notes', ensureLoggedIn, require('./routes/api/notes'));
+app.use('/image', s3Router)
 
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
