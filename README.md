@@ -18,7 +18,7 @@ Upload maps, character portraits, and whatever other images you need to help bri
 
 ![Fullscreen Map](https://i.imgur.com/tWwGTYX.png)
 
-Head over to College of Lore (https://college-of-lore-bc09aec1e7ac.herokuapp.com/) and start your adventure today!
+Head over to [College of Lore](https://college-of-lore-bc09aec1e7ac.herokuapp.com/) and start your adventure today!
 
 ---
 
